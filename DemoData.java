@@ -1,0 +1,71 @@
+package uczelnia;
+
+import uczelnia.osoba.pracownik.PracownikAdministracyjny;
+import uczelnia.osoba.pracownik.PracownikBadawczoDydaktyczny;
+import uczelnia.osoba.student.Kurs;
+import uczelnia.osoba.student.Student;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class DemoData {
+
+    public static KontenerDanych utworzDaneTestowe() {
+        KontenerDanych kontener = new KontenerDanych();
+
+
+        PracownikBadawczoDydaktyczny profesorNowak = new PracownikBadawczoDydaktyczny(
+                "Andrzej", "Nowak", "65091212345", 58, "M", "Profesor Zwyczajny", 32, 12500.00, 76
+        );
+        PracownikBadawczoDydaktyczny adiunktKowalska = new PracownikBadawczoDydaktyczny(
+                "Magdalena", "Kowalska", "82030567891", 42, "K", "Adiunkt", 52.0, 7800.00, 22
+        );
+        PracownikBadawczoDydaktyczny adiunktKowalskaStarsza = new PracownikBadawczoDydaktyczny(
+                "Maria", "Kowalska", "82030567891", 45, "K", "Adiunkt", 52.0, 7800.00, 22
+        );
+        PracownikAdministracyjny SpecjalistaKarol = new PracownikAdministracyjny(
+                "Karol", "Musiał", "12312312323", 42, "M", "Specjalista", 5.0, 4200.0, 10
+        );
+        PracownikAdministracyjny AdministracyjnyMarek = new PracownikAdministracyjny(
+                "Marek", "Nowicki", "87010378901", 38, "M", "Specjalista", 8.0, 4800.0, 25
+        );
+        PracownikAdministracyjny kierownikAdm = new PracownikAdministracyjny(
+                "Joanna", "Kowalczyk", "75020356789", 48, "K", "Specjalista", 20.0, 6200.0, 5
+        );
+
+
+        Kurs k1 = new Kurs("OSK", profesorNowak, 4);
+        Kurs k2 = new Kurs("ALGEBRA", adiunktKowalska, 4);
+
+        List<Kurs> kursyList = new ArrayList<>();
+        kursyList.add(k1);
+        kursyList.add(k2);
+
+
+        kontener.dodajKurs(k1);
+        kontener.dodajKurs(k2);
+
+
+        Student student1 = new Student(
+                "Piotr", "Kowalski", "02121212345", 20, "M", 12345, 1, kursyList,
+                false, true, false, true, false);
+
+        Student student2 = new Student(
+                "Anna", "Kwiatkowska", "03221298765", 21, "K", 23456, 2, kursyList,
+                false, true, false, true, false);
+
+
+        kontener.dodajOsobe(profesorNowak);
+        kontener.dodajOsobe(adiunktKowalska);
+        kontener.dodajOsobe(adiunktKowalskaStarsza);
+        kontener.dodajOsobe(SpecjalistaKarol);
+        kontener.dodajOsobe(AdministracyjnyMarek);
+        kontener.dodajOsobe(kierownikAdm);
+        kontener.dodajOsobe(student1);
+        kontener.dodajOsobe(student2);
+
+        System.out.println("Kontener danych demonstracyjnych został utworzony.");
+
+        return kontener;
+    }
+}
