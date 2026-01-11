@@ -1,6 +1,8 @@
 package uczelnia.osoba.pracownik;
 
-public class PracownikAdministracyjny extends PracownikUczelni {
+import uczelnia.osoba.WyswietlDane;
+
+public class PracownikAdministracyjny extends PracownikUczelni implements WyswietlDane {
     private int liczbNadgodzin;
 
     public PracownikAdministracyjny(String imie, String nazwisko, String pesel, int wiek, String plec, String stanowisko,
@@ -14,5 +16,10 @@ public class PracownikAdministracyjny extends PracownikUczelni {
     @Override
     public String toString() {
         return super.toString() + "\nLiczba Nadgodzin: " + getLiczbNadgodzin();
+    }
+
+    @Override
+    public void wyswietlPelneDane() {
+        System.out.println(this.toString());
     }
 }

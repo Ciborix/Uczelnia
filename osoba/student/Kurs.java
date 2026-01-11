@@ -1,10 +1,11 @@
 package uczelnia.osoba.student;
 
+import uczelnia.osoba.WyswietlDane;
 import uczelnia.osoba.pracownik.PracownikBadawczoDydaktyczny;
 
 import java.io.Serializable;
 
-public class Kurs implements Serializable {
+public class Kurs implements Serializable, WyswietlDane {
     private static final long serialVersionUID = 1L;
 
     private String nazwa;
@@ -31,5 +32,10 @@ public class Kurs implements Serializable {
         sb.append("Punkty ECTS: ").append(getPunktyECTS()).append("\n");
 
         return sb.toString();
+    }
+
+    @Override
+    public void wyswietlPelneDane() {
+        System.out.println(this.toString());
     }
 }

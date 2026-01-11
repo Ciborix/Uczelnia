@@ -1,10 +1,11 @@
 package uczelnia.osoba.student;
 
 import uczelnia.osoba.Osoba;
+import uczelnia.osoba.WyswietlDane;
 
 import java.util.List;
 
-public class Student extends Osoba {
+public class Student extends Osoba implements WyswietlDane {
     private int nrIndeks;
     private int rokStudiow;
     private List<Kurs> kursList;
@@ -80,4 +81,8 @@ public class Student extends Osoba {
         return sb.toString();
     }
 
+    @Override
+    public void wyswietlPelneDane() {
+        System.out.println(this.toString());
+    }
 }
