@@ -1,15 +1,12 @@
 package uczelnia.app;
 
 import uczelnia.IOTerminal;
-import uczelnia.KontenerDanych;
+import uczelnia.Dane.KontenerDanych;
 import uczelnia.KreatorDanych;
 import uczelnia.MenagerDanych;
 import uczelnia.osoba.Osoba;
-import uczelnia.osoba.pracownik.PracownikBadawczoDydaktyczny;
-import uczelnia.osoba.student.Kurs;
 
 
-import java.util.List;
 import java.util.Scanner;
 
 public class UczelniaApp {

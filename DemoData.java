@@ -1,5 +1,6 @@
 package uczelnia;
 
+import uczelnia.Dane.KontenerDanych;
 import uczelnia.osoba.pracownik.PracownikAdministracyjny;
 import uczelnia.osoba.pracownik.PracownikBadawczoDydaktyczny;
 import uczelnia.osoba.student.Kurs;

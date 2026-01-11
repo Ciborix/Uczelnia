@@ -1,10 +1,11 @@
-package uczelnia;
+package uczelnia.Dane;
 import uczelnia.osoba.*;
 import uczelnia.osoba.student.*;
 import uczelnia.osoba.pracownik.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class KontenerDanych implements Serializable {
@@ -158,5 +159,69 @@ public class KontenerDanych implements Serializable {
     public void pokazWszystkieKursy() {
         var kursyStudentow = wyszukajKurs(null, null, null);
         drukujKursy(kursyStudentow);
+    }
+
+    public void usunPracownika(int opcja, String wartosc)
+    {
+        Iterator<Osoba> it = osoby.iterator();
+        while (it.hasNext()) {
+            Osoba o = it.next();
+            if (o instanceof PracownikUczelni p) {
+                boolean doUsuniecia = false;
+                switch (opcja) {
+                    case 1 -> doUsuniecia = p.getNazwisko().equalsIgnoreCase(wartosc); //nazwisko
+                    case 2 -> doUsuniecia = p.getImie().equalsIgnoreCase(wartosc); //imie
+                    case 4 -> doUsuniecia = p.getStanowisko().equalsIgnoreCase(wartosc); //stanowisko
+                    case 3 -> //staz pracy
+                    {
+                        try {
+                            doUsuniecia = p.getStazPracy() == Double.parseDouble(wartosc);
+                        } catch (NumberFormatException e) {
+                            System.out.println("Bląd: Staż musi byc liczba");
+                        }
+                    }
+                }
+                if (doUsuniecia) it.remove();
+            }
+        }
+    }
+
+    public void usunStudenta(int opcja, String wartosc) {
+        Iterator<Osoba> it = osoby.iterator();
+        while (it.hasNext()) {
+            Osoba o = it.next();
+            if (o instanceof Student s) {
+                boolean doUsuniecia = false;
+                switch (opcja) {
+                    case 1 -> doUsuniecia = s.getNazwisko().equalsIgnoreCase(wartosc); //nazwisko
+                    case 2 -> doUsuniecia = s.getImie().equalsIgnoreCase(wartosc); //imie
+                    case 3 -> doUsuniecia = String.valueOf(s.getNrIndeks()).equals(wartosc); //indeks
+                    case 4 -> doUsuniecia = String.valueOf(s.getRokStudiow()).equals(wartosc); //rok
+                }
+                if (doUsuniecia) it.remove();
+            }
+        }
+    }
+
+    public void usunKurs(int opcja, String wartosc)
+    {
+        Iterator<Kurs> it = kursy.iterator();
+        while (it.hasNext()) {
+            Kurs k = it.next();
+            boolean doUsuniecia = false;
+            switch (opcja) {
+                case 1 -> doUsuniecia = k.getNazwa().equalsIgnoreCase(wartosc);
+                case 2 -> doUsuniecia = k.getProwadzacy().equalsIgnoreCase(wartosc);
+                case 3 -> {
+                    try{
+                        doUsuniecia = k.getPunktyECTS() == Double.parseDouble(wartosc);
+                    }
+                    catch (NumberFormatException e){
+                        System.out.println("Błąd. Punkty ECTS muszą byc liczba całkowita");
+                    }
+                }
+            }
+            if (doUsuniecia) it.remove();
+        }
     }
 }

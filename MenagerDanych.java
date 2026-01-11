@@ -1,6 +1,8 @@
 package uczelnia;
 
 
+import uczelnia.Dane.KontenerDanych;
+
 import java.io.*;
 
 public class MenagerDanych {
