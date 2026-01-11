@@ -224,4 +224,6 @@ public class KontenerDanych implements Serializable {
             if (doUsuniecia) it.remove();
         }
     }
+
+
 }
