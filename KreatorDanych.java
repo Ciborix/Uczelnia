@@ -4,7 +4,6 @@ import uczelnia.osoba.pracownik.PracownikAdministracyjny;
 import uczelnia.osoba.pracownik.PracownikBadawczoDydaktyczny;
 import uczelnia.osoba.student.Student;
 import uczelnia.osoba.student.Kurs;
-import uczelnia.osoba.Osoba;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -124,40 +123,21 @@ public class KreatorDanych {
                 liczbaNadgodzin
         );
     }
-    public Kurs utworzKurs(Scanner scanner, List<PracownikBadawczoDydaktyczny> listaProwadzacych) {
+    public Kurs utworzKurs(Scanner scanner) {
         System.out.println("\n--- Tworzenie Kursu ---");
         String nazwa = ioTerminal.wczytajString(scanner, "Podaj nazwę kursu");
         int punktyECTS = ioTerminal.wczytajInt(scanner, "Podaj punkty ECTS");
-
-        System.out.println("\n--- Wybierz Prowadzącego (tylko Badawczo-Dydaktyczni) ---");
-        if (listaProwadzacych.isEmpty()) {
-            System.out.println("Brak dostępnych prowadzących. Dodaj pracownika dydaktycznego, aby móc dodać kurs.");
-            return null;
-        }
-
-        for (int i = 0; i < listaProwadzacych.size(); i++) {
-            System.out.println((i + 1) + ". " + listaProwadzacych.get(i).getImie() + " " + listaProwadzacych.get(i).getNazwisko());
-        }
-
-        int indeks = ioTerminal.wczytajInt(scanner, "Wybierz numer prowadzącego (1-" + listaProwadzacych.size() + ")");
-
-        if (indeks < 1 || indeks > listaProwadzacych.size()) {
-            System.out.println("Nieprawidłowy wybór. Anulowanie.");
-            return null;
-        }
-
-        PracownikBadawczoDydaktyczny prowadzacy = listaProwadzacych.get(indeks - 1);
-
+        String prowadzacy = ioTerminal.wczytajString(scanner, "Podaj prowadzacego kursu");
         return new Kurs(nazwa, prowadzacy, punktyECTS);
     }
 
-    public static List<PracownikBadawczoDydaktyczny> filtrujProwadzacych(List<Osoba> osoby) {
-        List<PracownikBadawczoDydaktyczny> prowadzacy = new ArrayList<>();
-        for (Osoba o : osoby) {
-            if (o instanceof PracownikBadawczoDydaktyczny) {
-                prowadzacy.add((PracownikBadawczoDydaktyczny) o);
-            }
-        }
-        return prowadzacy;
-    }
+//    public static List<PracownikBadawczoDydaktyczny> filtrujProwadzacych(List<Osoba> osoby) {
+//        List<PracownikBadawczoDydaktyczny> prowadzacy = new ArrayList<>();
+//        for (Osoba o : osoby) {
+//            if (o instanceof PracownikBadawczoDydaktyczny) {
+//                prowadzacy.add((PracownikBadawczoDydaktyczny) o);
+//            }
+//        }
+//        return prowadzacy;
+//    }
 }

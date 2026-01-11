@@ -5,14 +5,7 @@ public class PracownikAdministracyjny extends PracownikUczelni {
 
     public PracownikAdministracyjny(String imie, String nazwisko, String pesel, int wiek, String plec, String stanowisko,
                                     double stazPracy, double pensja, int liczbaNadgodzin){
-        super(imie,
-                nazwisko,
-                pesel,
-                wiek,
-                plec,
-                stanowisko,
-                stazPracy,
-                pensja);
+        super(imie,nazwisko,pesel,wiek,plec,stanowisko,stazPracy,pensja);
         this.liczbNadgodzin = liczbaNadgodzin;
     }
 

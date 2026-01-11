@@ -41,30 +41,30 @@ public class UczelniaApp {
     }
 
 
-//    private void wyswietlMenu() {
-//        System.out.println("\n--- MENU GŁÓWNE ---");
-//        System.out.println("1. Dodaj Studenta");
-//        System.out.println("2. Dodaj Pracownika Badawczo-Dydaktycznego");
-//        System.out.println("3. Dodaj Pracownika Administracyjnego ");
-//        System.out.println("4. Dodaj Kurs");
-//        System.out.println("5. Wyświetl wszystkie Osoby");
-//        System.out.println("6. Wyświetl wszystkie Kursy");
-//        System.out.println("9. Zapisz całą bazę");
-//        System.out.println("0. Zakończ program");
-//        System.out.print("Wybierz opcję: ");
-//    }
-
-    private void wyswietlMenu()
-    {
-        System.out.println("\n==== MENU GŁÓWNE ====");
-        System.out.println("1. Wczytaj z pliku");
-        System.out.println("2. Wyświetl");
-        System.out.println("3. Wyszukaj istnieje danej klasy");
-        System.out.println("4. Dodaj dany obiekt");
-        System.out.println("5. Sortuj względem danego parametru");
-        System.out.println("6. Usuń obiekt");
-        System.out.println("10. Zapisz do pliku");
+    private void wyswietlMenu() {
+        System.out.println("\n--- MENU GŁÓWNE ---");
+        System.out.println("1. Dodaj Studenta");
+        System.out.println("2. Dodaj Pracownika Badawczo-Dydaktycznego");
+        System.out.println("3. Dodaj Pracownika Administracyjnego ");
+        System.out.println("4. Dodaj Kurs");
+        System.out.println("5. Wyświetl wszystkie Osoby");
+        System.out.println("6. Wyświetl wszystkie Kursy");
+        System.out.println("9. Zapisz całą bazę");
+        System.out.println("0. Zakończ program");
+        System.out.print("Wybierz opcję: ");
     }
+
+//    private void wyswietlMenu() tak ma wygladac
+//    {
+//        System.out.println("\n==== MENU GŁÓWNE ====");
+//        System.out.println("1. Wczytaj z pliku");
+//        System.out.println("2. Wyświetl");
+//        System.out.println("3. Wyszukaj istnieje danej klasy");
+//        System.out.println("4. Dodaj dany obiekt");
+//        System.out.println("5. Sortuj względem danego parametru");
+//        System.out.println("6. Usuń obiekt");
+//        System.out.println("10. Zapisz do pliku");
+//    }
 
     public void uruchom() {
         int wybor = -1;
@@ -88,12 +88,13 @@ public class UczelniaApp {
                         System.out.println("Dodano: " + nowyPracownik.getImie() + " " + nowyPracownik.getNazwisko());
                         break;
                     case 3:
-                        List<PracownikBadawczoDydaktyczny> prowadzacy = KreatorDanych.filtrujProwadzacych(kontener.getOsoby());
-                        Kurs nowyKurs = kreatorDanych.utworzKurs(scanner, prowadzacy);
-                        if (nowyKurs != null) {
-                            kontener.dodajKurs(nowyKurs);
-                            System.out.println("Dodano Kurs: " + nowyKurs.getNazwa());
-                        }
+                        System.out.println("Potrzeba zmiany bo nie ma czegos takiego jak filtruj Prowadzacych bo usunalem w kursach odwolanie");
+//                        List<PracownikBadawczoDydaktyczny> prowadzacy = KreatorDanych.filtrujProwadzacych(kontener.getOsoby());
+//                        Kurs nowyKurs = kreatorDanych.utworzKurs(scanner, prowadzacy);
+//                        if (nowyKurs != null) {
+//                            kontener.dodajKurs(nowyKurs);
+//                            System.out.println("Dodano Kurs: " + nowyKurs.getNazwa());
+//                        }
                         break;
                     case 4:
                         Osoba nowyPracownikAdm = kreatorDanych.utworzPracownikaAdministracyjnego(scanner);
