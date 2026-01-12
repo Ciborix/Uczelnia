@@ -1,4 +1,5 @@
 package uczelnia.Dane;
+import uczelnia.obserwator.IObserwator;
 import uczelnia.osoba.*;
 import uczelnia.osoba.student.*;
 import uczelnia.osoba.pracownik.*;
@@ -13,6 +14,7 @@ public class KontenerDanych implements Serializable {
 
     private List<Osoba> osoby;
     private List<Kurs> kursy = new ArrayList<>();
+    private List<IObserwator> obsewatorzy = new ArrayList<>();
 
     public KontenerDanych()
     {
@@ -198,7 +200,11 @@ public class KontenerDanych implements Serializable {
                     case 3 -> doUsuniecia = String.valueOf(s.getNrIndeks()).equals(wartosc); //indeks
                     case 4 -> doUsuniecia = String.valueOf(s.getRokStudiow()).equals(wartosc); //rok
                 }
-                if (doUsuniecia) it.remove();
+                if (doUsuniecia)
+                {
+                    it.remove();
+                    powiadom("Usunieto studenta: " + s.przedstawSie());
+                }
             }
         }
     }
@@ -221,9 +227,34 @@ public class KontenerDanych implements Serializable {
                     }
                 }
             }
-            if (doUsuniecia) it.remove();
+            if (doUsuniecia)
+            {
+                it.remove();
+                powiadom("Usunieto kurs: " + k.wyswietlDane());
+            }
         }
     }
+
+    public void dodajObserwatora(IObserwator obs)
+    {
+        obsewatorzy.add(obs);
+    }
+
+    public void powiadom(String msg)
+    {
+        for(IObserwator obs: obsewatorzy)
+        {
+            obs.aktualizuj(msg, this);
+        }
+    }
+
+
+
+    public void zapiszDaneDoPliku()
+    {
+//
+    }
+
 
 
 }

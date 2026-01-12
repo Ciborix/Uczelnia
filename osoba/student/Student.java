@@ -81,6 +81,11 @@ public class Student extends Osoba implements WyswietlDane {
         return sb.toString();
     }
 
+    public String przedstawSie()
+    {
+        return "Student: " + getImie() + " " + getNazwisko() + "Indeks: " + getNrIndeks();
+    }
+
     @Override
     public void wyswietlPelneDane() {
         System.out.println(this.toString());

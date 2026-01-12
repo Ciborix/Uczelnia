@@ -38,4 +38,7 @@ public class Kurs implements Serializable, WyswietlDane {
     public void wyswietlPelneDane() {
         System.out.println(this.toString());
     }
+
+    public String wyswietlDane()
+    {return "Nazwa: " + getNazwa() + " " + "Proawdzacy: " + getProwadzacy() + "Punkty ECTS: " + getPunktyECTS();}
 }
