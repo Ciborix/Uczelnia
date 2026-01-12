@@ -22,9 +22,16 @@ public class KontenerDanych implements Serializable {
         this.kursy=new ArrayList<>();
     }
 
-    public void dodajOsobe(Osoba osoba){osoby.add(osoba);}
+    public void dodajOsobe(Osoba osoba){
+        osoby.add(osoba);
+        powiadom("Dodano do bazy: " + osoba.przedstawSie());
+    }
 
-    public void dodajKurs(Kurs kurs)   { this.kursy.add(kurs);  }
+    public void dodajKurs(Kurs kurs)
+    {
+        this.kursy.add(kurs);
+        powiadom("Dodano nowy kurs: " + kurs.wyswietlDane());
+    }
 
     public List<Osoba> getOsoby() { return osoby; }
     public List<Kurs> getKursy() { return kursy; }

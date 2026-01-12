@@ -8,8 +8,6 @@ import uczelnia.comparator.Kursy.PoEctsNazwiskuProw;
 import uczelnia.comparator.Osoba.PoNazwisku;
 import uczelnia.comparator.Osoba.PoNazwiskuImieniu;
 import uczelnia.comparator.Osoba.PoNazwiskuWieku;
-import uczelnia.obserwator.KonsolaInformator;
-import uczelnia.obserwator.MonitorStanu;
 
 import java.util.Scanner;
 
@@ -26,8 +24,7 @@ public class Kontroler {
         this.menager = menager;
         this.terminal = terminal;
         this.kreator = new KreatorDanych(terminal);
-        kontener.dodajObserwatora(new MonitorStanu());
-        kontener.dodajObserwatora(new KonsolaInformator());
+
     }
 
     public void start() {

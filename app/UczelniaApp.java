@@ -11,6 +11,8 @@ public class UczelniaApp {
         MenagerDanych manager = new MenagerDanych("uczelnia_baza.ser");
         IOTerminal terminal = new IOTerminal();
         KontenerDanych kontener = manager.wczytajBaze();
+        kontener.dodajObserwatora(new KonsolaInformator());
+        kontener.dodajObserwatora(new MonitorStanu());
         Kontroler glownyKontroler = new Kontroler(kontener, manager, terminal);
         glownyKontroler.start();
     }
