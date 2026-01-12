@@ -8,6 +8,6 @@ public class MonitorStanu implements IObserwator{
         int liczbaosów = kontener.getOsoby().size();
         int liczbakursow = kontener.getKursy().size();
 
-        System.out.println("[STAN]: W systemie snajduje się " + liczbaosów + " osób oraz tyle kursów: " + liczbakursow + "[STAN]" + '\n' );
+        System.out.println("[STAN]: W systemie snajduje się " + liczbaosów + " osób oraz tyle kursów: " + liczbakursow + " [STAN]" + '\n' );
     }
 }

@@ -17,7 +17,6 @@ public class KreatorDanych {
     }
 
 
-
     private String wczytajPlec(Scanner scanner) {
         String plec;
         do {

@@ -1,58 +1,70 @@
 package uczelnia;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class IOTerminal {
+    private final Scanner scanner = new Scanner(System.in);
 
-    public int wczytajInt(Scanner scanner, String prompt) {
-        int liczba = 0;
-
-        System.out.print(prompt + ": ");
-
+    // Metoda używana przez Kontroler do obsługi menu
+    public int ask(String pytanie) {
+        System.out.println(pytanie);
         while (true) {
             try {
-
-                if (scanner.hasNextInt()) {
-                    liczba = scanner.nextInt();
-                    scanner.nextLine();
-                    return liczba;
-                } else {
-
-                    throw new InputMismatchException();
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Błąd: Wymagana jest liczba całkowita. Spróbuj ponownie.");
-                scanner.nextLine();
+                System.out.print("Wybór: ");
+                return Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Błąd: Wymagana liczba całkowita.");
             }
         }
     }
 
-
-    public double wczytajDouble(Scanner scanner, String prompt) {
-        double liczba = 0.0;
-
+    // --- METODY DLA KREATORA DANYCH (Przywrócone) ---
+    public int wczytajInt(Scanner sc, String prompt) {
         System.out.print(prompt + ": ");
-
         while (true) {
             try {
-                if (scanner.hasNextDouble()) {
-                    liczba = scanner.nextDouble();
-                    scanner.nextLine();
-                    return liczba;
-                } else {
-                    throw new InputMismatchException();
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Błąd: Wymagana jest liczba zmiennoprzecinkowa. Sprawdź format regionalny (np. przecinek lub kropka). Spróbuj ponownie.");
-                scanner.nextLine();
+                return Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Błąd: Wymagana liczba całkowita.");
             }
         }
     }
 
+    public double wczytajDouble(Scanner sc, String prompt) {
+        System.out.print(prompt + ": ");
+        while (true) {
+            try {
+                String input = scanner.nextLine().replace(',', '.');
+                return Double.parseDouble(input);
+            } catch (NumberFormatException e) {
+                System.out.println("Błąd: Wymagana liczba zmiennoprzecinkowa.");
+            }
+        }
+    }
 
-    public String wczytajString(Scanner scanner, String prompt) {
+    public String wczytajString(Scanner sc, String prompt) {
         System.out.print(prompt + ": ");
         return scanner.nextLine();
+    }
+
+    // --- SEKCJA MENU ---
+    public int wyswietlMenuGlowne() {
+        return ask("\n--- SYSTEM ZARZĄDZANIA UCZELNIĄ ---\n1) Wyświetlanie\n2) Dodawanie\n3) Usuwanie\n4) Sortowanie\n5) Lista płac\n10) Zapisz\n0) Wyjście");
+    }
+
+    public int wybierzKategorieUsuwania() {
+        return ask("\n==== USUWANIE ====\n1. Student\n2. Pracownik\n3. Kurs\n0. Powrót");
+    }
+
+    public int wybierzKryteriumUsuwaniaStudenta() {
+        return ask("Kryterium: 1. Nazwisko | 2. Imię | 3. Indeks | 4. Rok");
+    }
+
+    public int wybierzKryteriumUsuwaniaPracownika() {
+        return ask("Kryterium: 1. Nazwisko | 2. Imię | 3. Staż | 4. Stanowisko");
+    }
+
+    public int wybierzKryteriumUsuwaniaKursu() {
+        return ask("Kryterium: 1. Nazwa | 2. Prowadzący | 3. ECTS");
     }
 }

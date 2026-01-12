@@ -83,7 +83,7 @@ public class Student extends Osoba implements WyswietlDane {
 
     public String przedstawSie()
     {
-        return "Student: " + getImie() + " " + getNazwisko() + "Indeks: " + getNrIndeks();
+        return "Student: " + getImie() + " " + getNazwisko() + " Indeks: " + getNrIndeks();
     }
 
     @Override
