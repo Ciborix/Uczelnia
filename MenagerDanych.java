@@ -13,7 +13,6 @@ public class MenagerDanych {
         this.nazwaPliku = nazwaPliku;
     }
 
-    // Metoda zapisu (bez zmian)
     public void zapiszBaze(KontenerDanych kontener) {
         try (ObjectOutputStream oos = new ObjectOutputStream(
                 new FileOutputStream(nazwaPliku))) {

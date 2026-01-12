@@ -45,21 +45,17 @@ public class KreatorDanych {
     public Student utworzStudenta(Scanner scanner) {
         System.out.println("\n--- Tworzenie Studenta ---");
 
-        // Pola Osoby
         String imie = ioTerminal.wczytajString("Podaj imię");
         String nazwisko = ioTerminal.wczytajString("Podaj nazwisko");
         String pesel = ioTerminal.wczytajString("Podaj PESEL");
         int wiek = ioTerminal.wczytajInt("Podaj wiek");
         String plec = wczytajPlec();
 
-        // Pola Studenta
         int nrIndeks = ioTerminal.wczytajInt("Podaj numer indeksu");
         int rokStudiow = ioTerminal.wczytajInt("Podaj rok studiów");
 
-        // Listy (na razie pusta)
         List<Kurs> kursyList = new ArrayList<>();
 
-        // Pola boolean (z walidacją T/N)
         boolean czyERASMUS = wczytajOpcjeTakNie("Czy student jest na Erasmusie?");
 
         int stopien = ioTerminal.wczytajInt("Wybierz stopień studiów (1: I stopień, 2: II stopień)");
@@ -78,19 +74,16 @@ public class KreatorDanych {
     public PracownikBadawczoDydaktyczny utworzPracownikaBadawczoDydaktycznego(Scanner scanner) {
         System.out.println("\n--- Tworzenie Pracownika Badawczo-Dydaktycznego ---");
 
-        // Pola Osoby
         String imie = ioTerminal.wczytajString("Podaj imię");
         String nazwisko = ioTerminal.wczytajString("Podaj nazwisko");
         String pesel = ioTerminal.wczytajString("Podaj PESEL");
         int wiek = ioTerminal.wczytajInt("Podaj wiek");
         String plec = wczytajPlec();
 
-        // Pola Pracownika Uczelni
         String stanowisko = ioTerminal.wczytajString("Podaj stanowisko");
         double stazPracy = ioTerminal.wczytajDouble("Podaj staż pracy (lata)");
         double pensja = ioTerminal.wczytajDouble("Podaj pensję");
 
-        // Pola Pracownika Badawczo-Dydaktycznego
         int liczbaPublikacji = ioTerminal.wczytajInt("Podaj liczbę publikacji");
 
         PracownikBadawczoDydaktyczny pbd = new PracownikBadawczoDydaktyczny(
