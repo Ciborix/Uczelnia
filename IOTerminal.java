@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class IOTerminal {
     private final Scanner scanner = new Scanner(System.in);
 
-    // Metoda używana przez Kontroler do obsługi menu
     public int ask(String pytanie) {
         System.out.println(pytanie);
         while (true) {
@@ -18,8 +17,7 @@ public class IOTerminal {
         }
     }
 
-    // --- METODY DLA KREATORA DANYCH (Przywrócone) ---
-    public int wczytajInt(Scanner sc, String prompt) {
+    public int wczytajInt(String prompt) {
         System.out.print(prompt + ": ");
         while (true) {
             try {
@@ -30,7 +28,7 @@ public class IOTerminal {
         }
     }
 
-    public double wczytajDouble(Scanner sc, String prompt) {
+    public double wczytajDouble(String prompt) {
         System.out.print(prompt + ": ");
         while (true) {
             try {
@@ -42,7 +40,7 @@ public class IOTerminal {
         }
     }
 
-    public String wczytajString(Scanner sc, String prompt) {
+    public String wczytajString(String prompt) {
         System.out.print(prompt + ": ");
         return scanner.nextLine();
     }

@@ -38,12 +38,6 @@ public class Student extends Osoba implements PrzedstawSie {
     public boolean isCzyStacjonarny() {return czyStacjonarny;}
     public boolean isCzyNieStacjonarny() {return czyNieStacjonarny;}
 
-    void dodajKurs(Kurs kurs) {
-        kursList.add(kurs);}
-
-    void usunKurs(Kurs kurs) {
-        kursList.remove(kurs);}
-
     @Override
     public String toString() {
 

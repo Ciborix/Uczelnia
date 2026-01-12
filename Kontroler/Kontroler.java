@@ -65,11 +65,12 @@ public class Kontroler {
     }
 
     private void zarzadzajDodawaniem() {
-        int co = terminal.ask("1. Student | 2. Pracownik Badawczy | 3. Pracownik Adm");
+        int co = terminal.ask("1. Student | 2. Pracownik Badawczy | 3. Pracownik Administracyjny | 4. Kurs");
         switch (co) {
             case 1 -> kontener.dodajOsobe(kreator.utworzStudenta(scanner));
             case 2 -> kontener.dodajOsobe(kreator.utworzPracownikaBadawczoDydaktycznego(scanner));
             case 3 -> kontener.dodajOsobe(kreator.utworzPracownikaAdministracyjnego(scanner));
+            case 4 -> kontener.dodajKurs(kreator.utworzKurs());
         }
     }
 
@@ -85,7 +86,7 @@ public class Kontroler {
         };
 
         if (opcja != 0) {
-            String val = terminal.wczytajString(scanner, "Podaj szukaną wartość");
+            String val = terminal.wczytajString("Podaj szukaną wartość");
             if (kat == 1) kontener.usunStudenta(opcja, val);
             else if (kat == 2) kontener.usunPracownika(opcja, val);
             else if (kat == 3) kontener.usunKurs(opcja, val);
