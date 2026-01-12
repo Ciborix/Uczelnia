@@ -187,6 +187,7 @@ public class KontenerDanych implements Serializable {
                     it.remove();
                     powiadom("Usunięto Pracownika: " + p.przedstawSie());
                 }
+                else System.out.println("Informacja: Nie znaleziono pracownika spełniającego podane kryteria.");
             }
         }
     }
@@ -208,6 +209,7 @@ public class KontenerDanych implements Serializable {
                     it.remove();
                     powiadom("Usunieto studenta: " + s.przedstawSie());
                 }
+                else System.out.println("Informacja: Nie znaleziono Studenta spełniającego podane kryteria.");
             }
         }
     }
@@ -235,11 +237,15 @@ public class KontenerDanych implements Serializable {
                 it.remove();
                 powiadom("Usunieto kurs: " + k.wyswietlDane());
             }
+            else System.out.println("Informacja: Nie znaleziono kursu spełniającego podane kryteria.");
         }
     }
 
     public void dodajObserwatora(IObserwator obs)
     {
+        if (obsewatorzy == null) {
+            obsewatorzy = new ArrayList();
+        }
         obsewatorzy.add(obs);
     }
 
@@ -252,7 +258,24 @@ public class KontenerDanych implements Serializable {
         }
     }
 
+    public void drukujListePlac() {
+        System.out.println("\n--- LISTA PŁAC PRACOWNIKÓW ---");
+        boolean znaleziono = false;
+        for (Osoba o : osoby) {
+            if (o instanceof PracownikUczelni p) {
+                znaleziono = true;
+                System.out.println("------------------------------------");
+                System.out.println("Pracownik: " + p.getImie() + " " + p.getNazwisko());
+                System.out.println("Stanowisko: " + p.getStanowisko());
+                System.out.println("Pensja zasadnicza: " + p.getPensja() + " zł");
+                System.out.println("Dodatek stażowy:   " + p.getDodatekStazowy() + " zł");
 
+                System.out.println("Suma do wypłaty:   " + p.getSumaWyplaty() + " zł");
+            }
+        }
+        if (!znaleziono) System.out.println("Brak pracowników w systemie.");
+        System.out.println("------------------------------------\n");
+    }
 
 
 }

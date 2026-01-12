@@ -16,8 +16,8 @@ public class UczelniaApp {
         KontenerDanych kontener = manager.wczytajBaze();
 
         // 3. Rejestracja obserwatorów (Logowanie, Stan, Auto-zapis)
-        kontener.dodajObserwatora(new KonsolaInformator());
-        kontener.dodajObserwatora(new MonitorStanu());
+//        kontener.dodajObserwatora(new KonsolaInformator());
+//        kontener.dodajObserwatora(new MonitorStanu());
 
         // 4. Start kontrolera
         Kontroler glownyKontroler = new Kontroler(kontener, manager, terminal);

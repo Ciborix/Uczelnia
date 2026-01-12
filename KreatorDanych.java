@@ -4,6 +4,8 @@ import uczelnia.osoba.pracownik.PracownikAdministracyjny;
 import uczelnia.osoba.pracownik.PracownikBadawczoDydaktyczny;
 import uczelnia.osoba.student.Student;
 import uczelnia.osoba.student.Kurs;
+import uczelnia.strategia.BonusAdministracyjny;
+import uczelnia.strategia.BonusBadawczy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,11 +93,13 @@ public class KreatorDanych {
         // Pola Pracownika Badawczo-Dydaktycznego
         int liczbaPublikacji = ioTerminal.wczytajInt(scanner, "Podaj liczbę publikacji");
 
-        return new PracownikBadawczoDydaktyczny(
+        PracownikBadawczoDydaktyczny pbd = new PracownikBadawczoDydaktyczny(
                 imie, nazwisko, pesel, wiek, plec,
                 stanowisko, stazPracy, pensja,
                 liczbaPublikacji
         );
+        pbd.setBonusStategia(new BonusBadawczy());
+        return pbd;
     }
 
     public PracownikAdministracyjny utworzPracownikaAdministracyjnego(Scanner scanner) {
@@ -116,11 +120,13 @@ public class KreatorDanych {
 
         int liczbaNadgodzin = ioTerminal.wczytajInt(scanner, "Podaj liczbę nadgodzin w miesiącu");
 
-        return new PracownikAdministracyjny(
+        PracownikAdministracyjny pa = new PracownikAdministracyjny(
                 imie, nazwisko, pesel, wiek, plec,
                 stanowisko, stazPracy, pensja,
                 liczbaNadgodzin
         );
+        pa.setBonusStategia(new BonusAdministracyjny());
+        return pa;
     }
     public Kurs utworzKurs(Scanner scanner) {
         System.out.println("\n--- Tworzenie Kursu ---");

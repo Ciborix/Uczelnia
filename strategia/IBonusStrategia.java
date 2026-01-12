@@ -2,6 +2,8 @@ package uczelnia.strategia;
 
 import uczelnia.osoba.pracownik.PracownikUczelni;
 
-public interface IBonusStrategia {
+import java.io.Serializable;
+
+public interface IBonusStrategia extends Serializable {
     double obliczBonus(PracownikUczelni p);
 }

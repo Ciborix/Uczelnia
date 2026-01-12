@@ -67,4 +67,22 @@ public class IOTerminal {
     public int wybierzKryteriumUsuwaniaKursu() {
         return ask("Kryterium: 1. Nazwa | 2. Prowadzący | 3. ECTS");
     }
+
+    public int wybierzOpcjeSortowania() {
+        return ask("\n--- SORTOWANIE ---\n" +
+                "1. Osoby: Po nazwisku\n" +
+                "2. Osoby: Nazwisko + Imię\n" +
+                "3. Osoby: Nazwisko + Wiek (malejąco)\n" +
+                "4. Kursy: ECTS + Nazwisko prowadzącego\n" +
+                "0. Powrót");
+    }
+
+    public int wybierzOpcjeWyswietlania() {
+        return ask("\n--- CO CHCESZ WYŚWIETLIĆ? ---\n" +
+                "1. Wszystkich (Osoby i Kursy)\n" +
+                "2. Tylko Studentów\n" +
+                "3. Tylko Pracowników\n" +
+                "4. Tylko Kursy\n" +
+                "0. Powrót");
+    }
 }

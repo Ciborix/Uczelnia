@@ -5,6 +5,8 @@ import uczelnia.osoba.pracownik.PracownikAdministracyjny;
 import uczelnia.osoba.pracownik.PracownikBadawczoDydaktyczny;
 import uczelnia.osoba.student.Kurs;
 import uczelnia.osoba.student.Student;
+import uczelnia.strategia.BonusAdministracyjny;
+import uczelnia.strategia.BonusBadawczy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +24,14 @@ public class DemoData {
         PracownikAdministracyjny AdministracyjnyMarek = new PracownikAdministracyjny("Marek", "Nowicki", "87010378901", 38, "M", "Specjalista", 8.0, 4800.0, 25);
         PracownikAdministracyjny kierownikAdm = new PracownikAdministracyjny("Joanna", "Kowalczyk", "75020356789", 48, "K", "Specjalista", 20.0, 6200.0, 5);
 
+        profesorNowak.setBonusStategia(new BonusBadawczy());
+        profesorNowak.setBonusStategia(new BonusBadawczy());
+        adiunktKowalska.setBonusStategia(new BonusBadawczy());
+        adiunktKowalskaStarsza.setBonusStategia(new BonusBadawczy());
+
+        SpecjalistaKarol.setBonusStategia(new BonusAdministracyjny());
+        AdministracyjnyMarek.setBonusStategia(new BonusAdministracyjny());
+        kierownikAdm.setBonusStategia(new BonusAdministracyjny());
 
         Kurs k1 = new Kurs("OSK", "Nowak", 4);
         Kurs k2 = new Kurs("ALGEBRA", "Kowalska", 4);
@@ -47,6 +57,7 @@ public class DemoData {
         kontener.dodajOsobe(kierownikAdm);
         kontener.dodajOsobe(student1);
         kontener.dodajOsobe(student2);
+
 
         System.out.println("Kontener danych demonstracyjnych został utworzony.");
 

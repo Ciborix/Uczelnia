@@ -4,6 +4,13 @@ import uczelnia.Dane.KontenerDanych;
 import uczelnia.IOTerminal;
 import uczelnia.MenagerDanych;
 import uczelnia.KreatorDanych;
+import uczelnia.comparator.Kursy.PoEctsNazwiskuProw;
+import uczelnia.comparator.Osoba.PoNazwisku;
+import uczelnia.comparator.Osoba.PoNazwiskuImieniu;
+import uczelnia.comparator.Osoba.PoNazwiskuWieku;
+import uczelnia.obserwator.KonsolaInformator;
+import uczelnia.obserwator.MonitorStanu;
+
 import java.util.Scanner;
 
 public class Kontroler {
@@ -19,6 +26,8 @@ public class Kontroler {
         this.menager = menager;
         this.terminal = terminal;
         this.kreator = new KreatorDanych(terminal);
+        kontener.dodajObserwatora(new MonitorStanu());
+        kontener.dodajObserwatora(new KonsolaInformator());
     }
 
     public void start() {
@@ -29,11 +38,29 @@ public class Kontroler {
 
     private void procesujWyborMenuGlownego(int wybor) {
         switch (wybor) {
+            case 1 -> zarzadzajWyswietleniem();
             case 2 -> zarzadzajDodawaniem();
             case 3 -> zarzadzajUsuwaniem();
+            case 4 -> zarzadzajSortowaniem();
+            case 5 -> kontener.drukujListePlac();
 
             case 10 -> menager.zapiszBaze(kontener);
             case 0 -> czyProgramDziala = false;
+        }
+    }
+    private void zarzadzajWyswietleniem() {
+        int wybor = terminal.wybierzOpcjeWyswietlania();
+        if (wybor == 0) return;
+
+        switch (wybor) {
+            case 1 -> {
+                kontener.pokazOsoby();
+                kontener.pokazWszystkieKursy();
+            }
+            case 2 -> kontener.pokazWszystkichStudentow();
+            case 3 -> kontener.pokazWszystkichPracownikow();
+            case 4 -> kontener.pokazWszystkieKursy();
+            default -> System.out.println("Nieprawidłowy wybór.");
         }
     }
 
@@ -63,5 +90,31 @@ public class Kontroler {
             else if (kat == 2) kontener.usunPracownika(opcja, val);
             else if (kat == 3) kontener.usunKurs(opcja, val);
         }
+    }
+
+    private void zarzadzajSortowaniem() {
+        int wybor = terminal.wybierzOpcjeSortowania();
+        if (wybor == 0) return;
+
+        switch (wybor) {
+            case 1 -> {
+                kontener.getOsoby().sort(new PoNazwisku());
+                System.out.println("Posortowano osoby po nazwisku.");
+            }
+            case 2 -> {
+                kontener.getOsoby().sort(new PoNazwiskuImieniu());
+                System.out.println("Posortowano osoby po nazwisku i imieniu.");
+            }
+            case 3 -> {
+                kontener.getOsoby().sort(new PoNazwiskuWieku());
+                System.out.println("Posortowano osoby po nazwisku i wieku (malejąco).");
+            }
+            case 4 -> {
+                kontener.getKursy().sort(new PoEctsNazwiskuProw());
+                System.out.println("Posortowano kursy po ECTS i prowadzącym.");
+            }
+            default -> System.out.println("Nieprawidłowy wybór.");
+        }
+        kontener.pokazOsoby();
     }
 }
