@@ -2,6 +2,6 @@ package uczelnia.strategia;
 
 import uczelnia.osoba.pracownik.PracownikUczelni;
 
-public interface IBonusStategia {
+public interface IBonusStrategia {
     double obliczBonus(PracownikUczelni p);
 }
