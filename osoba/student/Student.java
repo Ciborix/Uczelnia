@@ -1,11 +1,11 @@
 package uczelnia.osoba.student;
 
 import uczelnia.osoba.Osoba;
-import uczelnia.osoba.WyswietlDane;
+import uczelnia.osoba.PrzedstawSie;
 
 import java.util.List;
 
-public class Student extends Osoba implements WyswietlDane {
+public class Student extends Osoba implements PrzedstawSie {
     private int nrIndeks;
     private int rokStudiow;
     private List<Kurs> kursList;
@@ -81,13 +81,8 @@ public class Student extends Osoba implements WyswietlDane {
         return sb.toString();
     }
 
-    public String przedstawSie()
-    {
-        return "Student: " + getImie() + " " + getNazwisko() + " Indeks: " + getNrIndeks();
-    }
-
     @Override
-    public void wyswietlPelneDane() {
-        System.out.println(this.toString());
+    public String przedstawSie() {
+        return "Student: " + getImie() + " " + getNazwisko() + " Indeks: " + getNrIndeks();
     }
 }

@@ -1,8 +1,8 @@
 package uczelnia.osoba.pracownik;
 
-import uczelnia.osoba.WyswietlDane;
+import uczelnia.osoba.PrzedstawSie;
 
-public class PracownikBadawczoDydaktyczny extends PracownikUczelni implements WyswietlDane {
+public class PracownikBadawczoDydaktyczny extends PracownikUczelni implements PrzedstawSie {
     private int liczbaPublikacji;
 
     public PracownikBadawczoDydaktyczny(String imie, String nazwisko, String pesel, int wiek, String plec,
@@ -18,8 +18,9 @@ public class PracownikBadawczoDydaktyczny extends PracownikUczelni implements Wy
         return super.toString() + "\nLiczba Publikacji: " + getLiczbaPublikacji();
     }
 
+
     @Override
-    public void wyswietlPelneDane() {
-        System.out.println(this.toString());
+    public String przedstawSie() {
+        return "Pracownik Badawczo-Dydaktyczny: " + getImie() + " " + getNazwisko() + " Pesel: " + getPesel();
     }
 }

@@ -2,7 +2,7 @@ package uczelnia.osoba;
 
 import java.io.Serializable;
 
-public abstract class Osoba implements Serializable {
+public abstract class Osoba implements Serializable, PrzedstawSie {
     private static final long serialVersionUID = 1L;
 
     private String imie;
@@ -32,4 +32,9 @@ public abstract class Osoba implements Serializable {
         return "Imie: " + getImie() + "\nNazwisko: " + getNazwisko() + "\nPesel: "
                 + getPesel() + "\nWiek: " + getWiek() + "\nPłeć: " + getPlec();
     }
+    public String przedstawSie()
+    {
+        return getImie() + " " + getNazwisko();
+    }
+
 }

@@ -14,7 +14,7 @@ public class KontenerDanych implements Serializable {
 
     private List<Osoba> osoby;
     private List<Kurs> kursy = new ArrayList<>();
-    private List<IObserwator> obsewatorzy = new ArrayList<>();
+    private transient List<IObserwator> obsewatorzy = new ArrayList<>();
 
     public KontenerDanych()
     {
@@ -23,7 +23,6 @@ public class KontenerDanych implements Serializable {
     }
 
     public void dodajOsobe(Osoba osoba){osoby.add(osoba);}
-    public void usunOsobe(Osoba osoba){osoby.remove(osoba);}
 
     public void dodajKurs(Kurs kurs)   { this.kursy.add(kurs);  }
 
@@ -183,7 +182,11 @@ public class KontenerDanych implements Serializable {
                         }
                     }
                 }
-                if (doUsuniecia) it.remove();
+                if (doUsuniecia)
+                {
+                    it.remove();
+                    powiadom("Usunięto Pracownika: " + p.przedstawSie());
+                }
             }
         }
     }
@@ -242,18 +245,13 @@ public class KontenerDanych implements Serializable {
 
     public void powiadom(String msg)
     {
+        if (obsewatorzy == null) return;
         for(IObserwator obs: obsewatorzy)
         {
             obs.aktualizuj(msg, this);
         }
     }
 
-
-
-    public void zapiszDaneDoPliku()
-    {
-//
-    }
 
 
 
