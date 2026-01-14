@@ -35,5 +35,5 @@ public class Kurs implements Serializable {
 
 
     public String wyswietlDane()
-    {return "Nazwa: " + getNazwa() + " " + "Proawdzacy: " + getProwadzacy() + "Punkty ECTS: " + getPunktyECTS();}
+    {return "Nazwa: " + getNazwa() + " " + "Proawdzacy: " + getProwadzacy() + " Punkty ECTS: " + getPunktyECTS();}
 }

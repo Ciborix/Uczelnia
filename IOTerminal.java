@@ -17,10 +17,12 @@ public class IOTerminal {
         }
     }
 
-    public int wczytajInt(String prompt) {
+    public Integer wczytajInt(String prompt) {
         System.out.print(prompt + ": ");
         while (true) {
             try {
+                String input = scanner.nextLine().trim();
+                if (input.equalsIgnoreCase("null")) return null;
                 return Integer.parseInt(scanner.nextLine());
             } catch (NumberFormatException e) {
                 System.out.println("Błąd: Wymagana liczba całkowita.");
@@ -28,11 +30,12 @@ public class IOTerminal {
         }
     }
 
-    public double wczytajDouble(String prompt) {
+    public Double wczytajDouble(String prompt) {
         System.out.print(prompt + ": ");
         while (true) {
             try {
                 String input = scanner.nextLine().replace(',', '.');
+                if (input.equalsIgnoreCase("null")) return null;
                 return Double.parseDouble(input);
             } catch (NumberFormatException e) {
                 System.out.println("Błąd: Wymagana liczba zmiennoprzecinkowa.");
@@ -42,11 +45,13 @@ public class IOTerminal {
 
     public String wczytajString(String prompt) {
         System.out.print(prompt + ": ");
-        return scanner.nextLine();
+        String s = scanner.nextLine();
+        if (s.equalsIgnoreCase("null")) return null;
+        return s;
     }
 
     public int wyswietlMenuGlowne() {
-        return ask("\n--- SYSTEM ZARZĄDZANIA UCZELNIĄ ---\n1) Wyświetlanie\n2) Dodawanie\n3) Usuwanie\n4) Sortowanie\n5) Lista płac\n10) Zapisz\n0) Wyjście");
+        return ask("\n--- SYSTEM ZARZĄDZANIA UCZELNIĄ ---\n1) Wyświetlanie\n2) Dodawanie\n3) Usuwanie\n4) Sortowanie\n5) Lista płac\n6) Wyszukiwanie\n10) Zapisz\n0) Wyjście");
     }
 
     public int wybierzKategorieUsuwania() {
@@ -81,5 +86,13 @@ public class IOTerminal {
                 "3. Tylko Pracowników\n" +
                 "4. Tylko Kursy\n" +
                 "0. Powrót");
+    }
+    public int wybierzOpcjeWyszukiwania()
+    {
+        return ask("\n--- KOGO WYSZUKAC ---\n" +
+                "1. Studenta\n" +
+                "2. Pracownika\n" +
+                "3. Kursy\n");
+
     }
 }

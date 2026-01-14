@@ -121,7 +121,7 @@ public class KontenerDanych implements Serializable {
 
     public List<Kurs> wyszukajKurs(
             String nazwa,
-            PracownikBadawczoDydaktyczny prowadzacy,
+            String prowadzacy,
             Integer ECTS) {
 
         List<Kurs> wynik = new ArrayList<>();
@@ -141,7 +141,7 @@ public class KontenerDanych implements Serializable {
         else{
             for(Osoba o: k)
             {
-                System.out.println(o.toString());
+                System.out.println(o.toString() + '\n');
             }
         }
     }
