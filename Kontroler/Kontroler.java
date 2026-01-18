@@ -49,7 +49,7 @@ public class Kontroler {
             case 6 -> zarzadzajWyszukiwaniem();
             case 7 -> zarzadzajUsuwaniemDuplikatow();
 
-            case 10 -> menager.zapiszBaze(kontener);
+            case 10 -> zarzadzajZapisaniem();
             case 0 -> czyProgramDziala = false;
         }
     }
@@ -171,5 +171,10 @@ public class Kontroler {
     public void zarzadzajUsuwaniemDuplikatow()
     {
         kontener.usunDuplikaty();
+    }
+
+    public void zarzadzajZapisaniem(){
+        menager.zapiszBaze(kontener); //zapisze serializacje
+        menager.zapiszTXT(kontener,"baza.txt"); //zapisze od razu txt
     }
 }

@@ -30,8 +30,13 @@ public class KontenerDanych implements Serializable {
 
     public void dodajKurs(Kurs kurs)
     {
-        this.kursy.add(kurs);
-        powiadom("Dodano nowy kurs: " + kurs.wyswietlDane());
+        boolean juzJest = kursy.stream().anyMatch(k ->
+                k.getNazwa().equalsIgnoreCase(kurs.getNazwa()) &&
+                k.getProwadzacy().equalsIgnoreCase(kurs.getProwadzacy()));
+        if (!juzJest) {
+            this.kursy.add(kurs);
+            powiadom("Dodano nowy kurs: " + kurs.wyswietlDane());
+        }
     }
 
     public List<Osoba> getOsoby() { return osoby; }

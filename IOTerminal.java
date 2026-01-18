@@ -51,7 +51,7 @@ public class IOTerminal {
     }
 
     public int wyswietlMenuGlowne() {
-        return ask("\n--- SYSTEM ZARZĄDZANIA UCZELNIĄ ---\n1) Wyświetlanie\n2) Dodawanie\n3) Usuwanie\n4) Sortowanie\n5) Lista płac\n6) Wyszukiwanie\n10) Zapisz\n0) Wyjście");
+        return ask("\n--- SYSTEM ZARZĄDZANIA UCZELNIĄ ---\n1) Wyświetlanie\n2) Dodawanie\n3) Usuwanie\n4) Sortowanie\n5) Lista płac\n6) Wyszukiwanie\n7) Usuń duplikaty\n10) Zapisz\n0) Wyjście");
     }
 
     public int wybierzKategorieUsuwania() {
