@@ -47,6 +47,7 @@ public class Kontroler {
             case 5 -> kontener.drukujListePlac();
 
             case 6 -> zarzadzajWyszukiwaniem();
+            case 7 -> zarzadzajUsuwaniemDuplikatow();
 
             case 10 -> menager.zapiszBaze(kontener);
             case 0 -> czyProgramDziala = false;
@@ -166,5 +167,9 @@ public class Kontroler {
         System.out.printf(" ");
         List<Kurs> k = kontener.wyszukajKurs(nazwa, prowadzacy, ECTS);
         kontener.drukujKursy(k);
+    }
+    public void zarzadzajUsuwaniemDuplikatow()
+    {
+        kontener.usunDuplikaty();
     }
 }

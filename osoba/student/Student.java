@@ -4,6 +4,7 @@ import uczelnia.osoba.Osoba;
 import uczelnia.osoba.PrzedstawSie;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Student extends Osoba implements PrzedstawSie {
     private int nrIndeks;
@@ -78,5 +79,18 @@ public class Student extends Osoba implements PrzedstawSie {
     @Override
     public String przedstawSie() {
         return "Student: " + getImie() + " " + getNazwisko() + " Indeks: " + getNrIndeks();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return nrIndeks == student.nrIndeks;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nrIndeks);
     }
 }

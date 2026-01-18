@@ -6,6 +6,7 @@ import uczelnia.osoba.pracownik.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
@@ -287,5 +288,15 @@ public class KontenerDanych implements Serializable {
         System.out.println("------------------------------------\n");
     }
 
+    public void usunDuplikaty()
+    {
+        int rozmiarPrzed = osoby.size();
+        HashSet<Osoba> setBezPowtorzen = new HashSet<>(osoby);
+        osoby.clear();
+        osoby.addAll(setBezPowtorzen);
+        int usunieto = rozmiarPrzed - osoby.size();
+
+        powiadom("Nastąpiło czyszczenie bazy. Usunięto daną ilośc duplikatów: " + usunieto);
+    }
 
 }

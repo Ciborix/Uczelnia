@@ -3,6 +3,8 @@ package uczelnia.osoba.pracownik;
 import uczelnia.osoba.Osoba;
 import uczelnia.strategia.IBonusStrategia;
 
+import java.util.Objects;
+
 public abstract class PracownikUczelni extends Osoba {
     private String stanowisko;
     private double stazPracy;
@@ -44,4 +46,16 @@ public abstract class PracownikUczelni extends Osoba {
         return super.toString() + "\nStanowisko: " + getStanowisko() +"\nStaż pracy: " + getStazPracy() + "\nPensja: " + getPensja();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PracownikUczelni)) return false;
+        PracownikUczelni p = (PracownikUczelni) o;
+        return Objects.equals(this.getPesel(),p.getPesel());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getPesel());
+    }
 }
