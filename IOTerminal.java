@@ -95,4 +95,13 @@ public class IOTerminal {
                 "3. Kursy\n");
 
     }
+    public int wybierzOpcjePlikow()
+    {
+        return ask("--Co chcesz zrobic z danymi--\n " +
+                "1. Wczytac plik txt\n " +
+                "2. Zapisac plik txt\n " +
+                "3. Wczytac serializacje\n " +
+                "4. Zapisac serializacje\n " +
+                "5. Zapisac serializacje i txt owczesnych plików\n");
+    }
 }

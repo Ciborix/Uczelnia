@@ -76,7 +76,7 @@ public class MenagerDanych {
                 ArrayList<Kurs> kursy = new ArrayList<>();
                 if (typ.equals("SK")) {
                     for(int i=13;i+2<dane.length;i+=3) {
-                        Kurs k = new Kurs(dane[i],dane[i+1],Integer.parseInt(dane[i+2]));
+                        Kurs k = new Kurs(dane[i],dane[i+1],Integer.parseInt(dane[i+2].trim()));
                         kursy.add(k);
                         kontener.dodajKurs(k);
                     }
@@ -103,7 +103,8 @@ public class MenagerDanych {
                 kontener.dodajOsobe(pa);
                 break;
             case "PBD":
-                PracownikBadawczoDydaktyczny pbd = new PracownikBadawczoDydaktyczny(dane[1],
+                PracownikBadawczoDydaktyczny pbd = new PracownikBadawczoDydaktyczny(
+                        dane[1],
                         dane[2],
                         dane[3],
                         Integer.parseInt(dane[4]),
@@ -113,6 +114,7 @@ public class MenagerDanych {
                         Double.parseDouble(dane[8]),
                         Integer.parseInt(dane[9]));
                 kontener.dodajOsobe(pbd);
+                break;
 
         }
     }
@@ -143,8 +145,9 @@ public class MenagerDanych {
                     for (Kurs k : s.getKursyList()) {
                         sb.append(";")
                                 .append(k.getNazwa()).append(";")
-                                .append(k.getPunktyECTS()).append(";")
-                                .append(k.getProwadzacy());
+                                .append(k.getProwadzacy()).append(";")
+                                .append(k.getPunktyECTS());
+
                     }
                     pw.println(sb.toString());
 

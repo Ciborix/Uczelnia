@@ -71,6 +71,7 @@ public class Kontroler {
 
     private void zarzadzajDodawaniem() {
         int co = terminal.ask("1. Student | 2. Pracownik Badawczy | 3. Pracownik Administracyjny | 4. Kurs");
+        if (co == 0) return;
         switch (co) {
             case 1 -> kontener.dodajOsobe(kreator.utworzStudenta(scanner));
             case 2 -> kontener.dodajOsobe(kreator.utworzPracownikaBadawczoDydaktycznego(scanner));
@@ -174,7 +175,17 @@ public class Kontroler {
     }
 
     public void zarzadzajZapisaniem(){
-        menager.zapiszBaze(kontener); //zapisze serializacje
-        menager.zapiszTXT(kontener,"baza.txt"); //zapisze od razu txt
+        int wybor = terminal.wybierzOpcjePlikow();
+        if (wybor == 0);
+        switch (wybor) {
+            case 1 -> menager.wczytajBazeZTXT("baza.txt");
+            case 2 -> menager.zapiszTXT(kontener, "baza.txt");
+            case 3 -> menager.wczytajBaze();
+            case 4 -> menager.zapiszBaze(kontener);
+            case 5 -> {
+                menager.zapiszBaze(kontener);
+                menager.zapiszTXT(kontener, "baza.txt");
+            }
+        }
     }
 }
