@@ -179,12 +179,12 @@ public class Kontroler {
         if (wybor == 0);
         switch (wybor) {
             case 1 -> menager.wczytajBazeZTXT("baza.txt");
-            case 2 -> menager.zapiszTXT(kontener, "baza.txt");
+            case 2 -> menager.zapiszTXT(kontener, "uczelnia_baza.txt");
             case 3 -> menager.wczytajBaze();
             case 4 -> menager.zapiszBaze(kontener);
             case 5 -> {
                 menager.zapiszBaze(kontener);
-                menager.zapiszTXT(kontener, "baza.txt");
+                menager.zapiszTXT(kontener, "uczelnia_baza.txt");
             }
         }
     }

@@ -82,7 +82,7 @@ public class MenagerDanych {
                     }
                 }
                 Student student = new Student(dane[1], dane[2], dane[3],Integer.parseInt(dane[4]),dane[5], Integer.parseInt(dane[6]),Integer.parseInt(dane[7]),kursy,
-                        Boolean.parseBoolean(dane[8]),  // czyErasmus
+                        Boolean.parseBoolean(dane[8]),
                         Boolean.parseBoolean(dane[9]),
                         Boolean.parseBoolean(dane[10]),
                         Boolean.parseBoolean(dane[11]),
