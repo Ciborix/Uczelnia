@@ -122,10 +122,8 @@ public class MenagerDanych {
         try (PrintWriter pw = new PrintWriter(new File(nazwa))) {
             for (Osoba o : kontener.getOsoby()) {
                 if (o instanceof Student s) {
-                    // Ustalamy typ: S dla braku kursów, SK jeśli jakieś ma
                     String typ = s.getKursyList().isEmpty() ? "S" : "SK";
 
-                    // Budujemy podstawową linię (indeksy 0-12)
                     StringBuilder sb = new StringBuilder();
                     sb.append(typ).append(";")
                             .append(s.getImie()).append(";")
@@ -141,7 +139,6 @@ public class MenagerDanych {
                             .append(s.isCzyStacjonarny()).append(";")
                             .append(s.isCzyNieStacjonarny());
 
-                    // Jeśli są kursy, dopisujemy je (indeksy 13, 14, 15...)
                     for (Kurs k : s.getKursyList()) {
                         sb.append(";")
                                 .append(k.getNazwa()).append(";")

@@ -23,7 +23,7 @@ public class IOTerminal {
             try {
                 String input = scanner.nextLine().trim();
                 if (input.equalsIgnoreCase("null")) return null;
-                return Integer.parseInt(scanner.nextLine());
+                return Integer.parseInt(input);
             } catch (NumberFormatException e) {
                 System.out.println("Błąd: Wymagana liczba całkowita.");
             }
