@@ -1,5 +1,7 @@
 package uczelnia;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class IOTerminal {
@@ -15,6 +17,28 @@ public class IOTerminal {
                 System.out.println("Błąd: Wymagana liczba całkowita.");
             }
         }
+    }
+    public ArrayList<Integer> askWielokrotne(String pytanie)
+    {
+        boolean wybor = true;
+        ArrayList<Integer> zapytania = new ArrayList<>();
+        System.out.println(pytanie);
+        while(wybor)
+        {
+            try{
+                System.out.println("Wybór: ");
+                Integer lin = scanner.nextInt();
+                if (lin.equals(0)) {
+                    wybor = false;
+                    break;
+                }
+                zapytania.add(lin);
+            }
+            catch (NumberFormatException e){
+                System.out.println("Błąd: Wymagana liczba całkowita.");
+            }
+        }
+        return zapytania;
     }
 
     public Integer wczytajInt(String prompt) {
@@ -103,5 +127,9 @@ public class IOTerminal {
                 "3. Wczytac serializacje\n " +
                 "4. Zapisac serializacje\n " +
                 "5. Zapisac serializacje i txt owczesnych plików\n");
+    }
+    public ArrayList<Integer> wybierzOpcjeWyszukaniaPracownika()
+    {
+        return askWielokrotne(""); //wyszukiwanie itp itd
     }
 }

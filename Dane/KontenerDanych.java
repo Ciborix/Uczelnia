@@ -199,7 +199,7 @@ public class KontenerDanych implements Serializable {
                 {
                     it.remove();
                     powiadom("Usunięto Pracownika: " + p.przedstawSie());
-                    break;
+                    //                    break; zeby usuwało kazdego z wyszukanych
                 }
                 else System.out.println("Informacja: Nie znaleziono pracownika spełniającego podane kryteria.");
             }
@@ -222,7 +222,7 @@ public class KontenerDanych implements Serializable {
                 {
                     it.remove();
                     powiadom("Usunieto studenta: " + s.przedstawSie());
-                    break;
+//                    break; zeby usuwało kazdego z wyszukanych
                 }
                 else System.out.println("Informacja: Nie znaleziono Studenta spełniającego podane kryteria.");
             }
@@ -251,7 +251,7 @@ public class KontenerDanych implements Serializable {
             {
                 it.remove();
                 powiadom("Usunieto kurs: " + k.wyswietlDane());
-                break;
+                //                    break; zeby usuwało kazdego z wyszukanych
             }
             else System.out.println("Informacja: Nie znaleziono kursu spełniającego podane kryteria.");
         }
