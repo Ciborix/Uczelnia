@@ -1,0 +1,8 @@
+PBD;Andrzej;Nowak;65091212345;58;M;Profesor Zwyczajny;32.0;12500.0;76
+PBD;Magdalena;Kowalska;82030567891;42;K;Adiunkt;52.0;7800.0;22
+PBD;Maria;Kowalska;82030567891;45;K;Adiunkt;52.0;7800.0;22
+PA;Karol;Musiał;12312312323;42;M;Specjalista;5.0;4200.0;10
+PA;Marek;Nowicki;87010378901;38;M;Specjalista;8.0;4800.0;25
+PA;Joanna;Kowalczyk;75020356789;48;K;Specjalista;20.0;6200.0;5
+SK;Piotr;Kowalski;02121212345;20;M;12345;1;false;true;false;true;false;OSK;Nowak;4;ALGEBRA;Kowalska;4
+SK;Anna;Kwiatkowska;03221298765;21;K;23456;2;false;true;false;true;false;OSK;Nowak;4;ALGEBRA;Kowalska;4

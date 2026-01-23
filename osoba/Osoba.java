@@ -1,4 +1,4 @@
-package uczelnia.osoba;
+package osoba;
 
 import java.io.Serializable;
 

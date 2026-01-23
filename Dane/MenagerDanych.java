@@ -1,12 +1,11 @@
-package uczelnia;
+package Dane;
 
 
-import uczelnia.Dane.KontenerDanych;
-import uczelnia.osoba.Osoba;
-import uczelnia.osoba.pracownik.PracownikAdministracyjny;
-import uczelnia.osoba.pracownik.PracownikBadawczoDydaktyczny;
-import uczelnia.osoba.student.Kurs;
-import uczelnia.osoba.student.Student;
+import osoba.Osoba;
+import osoba.pracownik.PracownikAdministracyjny;
+import osoba.pracownik.PracownikBadawczoDydaktyczny;
+import osoba.student.Kurs;
+import osoba.student.Student;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -141,7 +140,6 @@ public class MenagerDanych {
                             .append(s.isCzyStacjonarny()).append(";")
                             .append(s.isCzyNieStacjonarny());
 
-                    // Jeśli są kursy, dopisujemy je (indeksy 13, 14, 15...)
                     for (Kurs k : s.getKursyList()) {
                         sb.append(";")
                                 .append(k.getNazwa()).append(";")

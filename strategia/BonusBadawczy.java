@@ -1,7 +1,7 @@
-package uczelnia.strategia;
+package strategia;
 
-import uczelnia.osoba.pracownik.PracownikBadawczoDydaktyczny;
-import uczelnia.osoba.pracownik.PracownikUczelni;
+import osoba.pracownik.PracownikBadawczoDydaktyczny;
+import osoba.pracownik.PracownikUczelni;
 
 public class BonusBadawczy implements IBonusStrategia {
     @Override

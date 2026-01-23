@@ -1,6 +1,6 @@
-package uczelnia.obserwator;
+package obserwator;
 
-import uczelnia.Dane.KontenerDanych;
+import Dane.KontenerDanych;
 
 public class KonsolaInformator implements IObserwator{
     @Override

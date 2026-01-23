@@ -1,6 +1,7 @@
-package uczelnia.obserwator;
+package obserwator;
 
-import uczelnia.Dane.KontenerDanych;
+
+import Dane.KontenerDanych;
 
 public interface IObserwator {
     void aktualizuj(String msg, KontenerDanych kontener);

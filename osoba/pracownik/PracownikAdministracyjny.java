@@ -1,6 +1,7 @@
-package uczelnia.osoba.pracownik;
+package osoba.pracownik;
 
-import uczelnia.osoba.PrzedstawSie;
+
+import osoba.PrzedstawSie;
 
 public class PracownikAdministracyjny extends PracownikUczelni implements PrzedstawSie {
     private int liczbNadgodzin;

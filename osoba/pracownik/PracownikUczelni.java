@@ -1,7 +1,7 @@
-package uczelnia.osoba.pracownik;
+package osoba.pracownik;
 
-import uczelnia.osoba.Osoba;
-import uczelnia.strategia.IBonusStrategia;
+import osoba.Osoba;
+import strategia.IBonusStrategia;
 
 import java.util.Objects;
 

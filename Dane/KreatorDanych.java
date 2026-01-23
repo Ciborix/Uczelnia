@@ -1,16 +1,15 @@
-package uczelnia;
-
-import uczelnia.osoba.pracownik.PracownikAdministracyjny;
-import uczelnia.osoba.pracownik.PracownikBadawczoDydaktyczny;
-import uczelnia.osoba.student.Student;
-import uczelnia.osoba.student.Kurs;
-import uczelnia.strategia.BonusAdministracyjny;
-import uczelnia.strategia.BonusBadawczy;
+package Dane;
+import IOterminal.IOTerminal;
+import osoba.pracownik.PracownikAdministracyjny;
+import osoba.pracownik.PracownikBadawczoDydaktyczny;
+import osoba.student.Kurs;
+import osoba.student.Student;
+import strategia.BonusAdministracyjny;
+import strategia.BonusBadawczy;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
 public class KreatorDanych {
     private final IOTerminal ioTerminal;
 

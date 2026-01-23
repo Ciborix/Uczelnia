@@ -1,7 +1,8 @@
-package uczelnia.osoba.student;
+package osoba.student;
 
-import uczelnia.osoba.Osoba;
-import uczelnia.osoba.PrzedstawSie;
+
+import osoba.Osoba;
+import osoba.PrzedstawSie;
 
 import java.util.List;
 import java.util.Objects;

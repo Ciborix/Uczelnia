@@ -1,12 +1,11 @@
-package uczelnia;
+package Dane;
 
-import uczelnia.Dane.KontenerDanych;
-import uczelnia.osoba.pracownik.PracownikAdministracyjny;
-import uczelnia.osoba.pracownik.PracownikBadawczoDydaktyczny;
-import uczelnia.osoba.student.Kurs;
-import uczelnia.osoba.student.Student;
-import uczelnia.strategia.BonusAdministracyjny;
-import uczelnia.strategia.BonusBadawczy;
+import osoba.pracownik.PracownikAdministracyjny;
+import osoba.pracownik.PracownikBadawczoDydaktyczny;
+import osoba.student.Kurs;
+import osoba.student.Student;
+import strategia.BonusAdministracyjny;
+import strategia.BonusBadawczy;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,8 +1,11 @@
-package uczelnia.Dane;
-import uczelnia.obserwator.IObserwator;
-import uczelnia.osoba.*;
-import uczelnia.osoba.student.*;
-import uczelnia.osoba.pracownik.*;
+package Dane;
+
+import obserwator.IObserwator;
+import osoba.Osoba;
+import osoba.pracownik.PracownikAdministracyjny;
+import osoba.pracownik.PracownikUczelni;
+import osoba.student.Kurs;
+import osoba.student.Student;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,69 +20,72 @@ public class KontenerDanych implements Serializable {
     private List<Kurs> kursy = new ArrayList<>();
     private transient List<IObserwator> obsewatorzy = new ArrayList<>();
 
-    public KontenerDanych()
-    {
-        this.osoby=new ArrayList<>();
-        this.kursy=new ArrayList<>();
+    public KontenerDanych() {
+        this.osoby = new ArrayList<>();
+        this.kursy = new ArrayList<>();
     }
 
-    public void dodajOsobe(Osoba osoba){
+    public void dodajOsobe(Osoba osoba) {
         osoby.add(osoba);
         powiadom("Dodano do bazy: " + osoba.przedstawSie());
     }
 
-    public void dodajKurs(Kurs kurs)
-    {
+    public void dodajKurs(Kurs kurs) {
         boolean juzJest = kursy.stream().anyMatch(k ->
                 k.getNazwa().equalsIgnoreCase(kurs.getNazwa()) &&
-                k.getProwadzacy().equalsIgnoreCase(kurs.getProwadzacy()));
+                        k.getProwadzacy().equalsIgnoreCase(kurs.getProwadzacy()));
         if (!juzJest) {
             this.kursy.add(kurs);
             powiadom("Dodano nowy kurs: " + kurs.wyswietlDane());
         }
     }
 
-    public List<Osoba> getOsoby() { return osoby; }
-    public List<Kurs> getKursy() { return kursy; }
+    public List<Osoba> getOsoby() {
+        return osoby;
+    }
+
+    public List<Kurs> getKursy() {
+        return kursy;
+    }
 
 
-    public void pokazOsoby()
-    {
+    public void pokazOsoby() {
         if (osoby == null || osoby.isEmpty()) {
             System.out.println("Brak osób do wyświetlenia.");
             return;
         }
 
-        for(int i=0;i<osoby.size();i++){
+        for (int i = 0; i < osoby.size(); i++) {
             System.out.println("-------Osoba " + i + "-------");
             System.out.println(osoby.get(i).toString());
             System.out.println("------------------------------");
         }
     }
+
     public List<PracownikUczelni> wyszukajPracownika(
             String nazwisko,
             String imie,
             String stanowisko,
             Double stazpracy,
             Integer liczbaNadgodzin,
-            Double pensja)
-    {
+            Double pensja) {
         List<PracownikUczelni> pracownicy = new ArrayList<>();
-        for(Osoba o: osoby){
+        for (Osoba o : osoby) {
             if (o instanceof PracownikUczelni) {
-                PracownikUczelni p=(PracownikUczelni)o;
+                PracownikUczelni p = (PracownikUczelni) o;
                 boolean ok = true;
                 if (nazwisko != null && !p.getNazwisko().equalsIgnoreCase(nazwisko)) ok = false;
                 if (imie != null && !p.getImie().equalsIgnoreCase(imie)) ok = false;
-                if (stanowisko != null && !p.getStanowisko().equalsIgnoreCase(stanowisko)) ok= false;
-                if (stazpracy != null && !stazpracy.equals(p.getStazPracy())) ok=false;
-                if (p instanceof PracownikAdministracyjny){
-                    PracownikAdministracyjny pa =  (PracownikAdministracyjny)p;
-                    if (liczbaNadgodzin!=null && !liczbaNadgodzin.equals(pa.getLiczbNadgodzin())) ok=false;
+                if (stanowisko != null && !p.getStanowisko().equalsIgnoreCase(stanowisko)) ok = false;
+                if (stazpracy != null && !stazpracy.equals(p.getStazPracy())) ok = false;
+                if (p instanceof PracownikAdministracyjny) {
+                    PracownikAdministracyjny pa = (PracownikAdministracyjny) p;
+                    if (liczbaNadgodzin != null && !liczbaNadgodzin.equals(pa.getLiczbNadgodzin())) ok = false;
                 }
-                if (pensja!=null && !pensja.equals(p.getPensja())) ok=false;
+                if (pensja != null && !pensja.equals(p.getPensja())) ok = false;
                 if (ok) pracownicy.add(p);
-            }}
+            }
+        }
         return pracownicy;
     }
 
@@ -88,35 +94,29 @@ public class KontenerDanych implements Serializable {
             String imie,
             Integer numerIndeksu,
             Integer rokStudiow,
-            String nazwaKursu)
-    {
-        List<Student> studenci=new ArrayList<>();
-        for(Osoba o: osoby)
-        {
-            if (o instanceof Student)
-            {
-                Student s=(Student)o;
+            String nazwaKursu) {
+        List<Student> studenci = new ArrayList<>();
+        for (Osoba o : osoby) {
+            if (o instanceof Student) {
+                Student s = (Student) o;
                 boolean ok = true;
-                if (nazwisko!=null && !s.getNazwisko().equalsIgnoreCase(nazwisko)) ok = false;
-                if (imie!=null && !s.getImie().equalsIgnoreCase(imie)) ok = false;
-                if (numerIndeksu!=null && !numerIndeksu.equals(s.getNrIndeks())) ok=false;
-                if (rokStudiow!=null && !rokStudiow.equals(s.getRokStudiow())) ok=false;
-                if (nazwaKursu!=null)
-                {
+                if (nazwisko != null && !s.getNazwisko().equalsIgnoreCase(nazwisko)) ok = false;
+                if (imie != null && !s.getImie().equalsIgnoreCase(imie)) ok = false;
+                if (numerIndeksu != null && !numerIndeksu.equals(s.getNrIndeks())) ok = false;
+                if (rokStudiow != null && !rokStudiow.equals(s.getRokStudiow())) ok = false;
+                if (nazwaKursu != null) {
                     List<Kurs> k = s.getKursyList();
-                    if (k==null || k.isEmpty()) ok=false; //student ma brak kursow
+                    if (k == null || k.isEmpty()) ok = false; //student ma brak kursow
                     else {
-                        boolean found=false;
-                        for(Kurs kurs : k)
-                        {
+                        boolean found = false;
+                        for (Kurs kurs : k) {
                             String nazwa_wewnetrzna = kurs.getNazwa();
-                            if (nazwa_wewnetrzna.equals(nazwaKursu))
-                            {
-                                found=true;
+                            if (nazwa_wewnetrzna.equals(nazwaKursu)) {
+                                found = true;
                                 break;
                             }
                         }
-                        if (!found) ok=false;
+                        if (!found) ok = false;
                     }
                 }
                 if (ok) studenci.add(s);
@@ -141,16 +141,15 @@ public class KontenerDanych implements Serializable {
         return wynik;
     }
 
-    public void drukujListeWyszukanych(List<? extends Osoba> k)
-    {
-        if (k==null || k.isEmpty()) System.out.println("Brak wyników dla podanych parametrów");
-        else{
-            for(Osoba o: k)
-            {
+    public void drukujListeWyszukanych(List<? extends Osoba> k) {
+        if (k == null || k.isEmpty()) System.out.println("Brak wyników dla podanych parametrów");
+        else {
+            for (Osoba o : k) {
                 System.out.println(o.toString() + '\n');
             }
         }
     }
+
     public void drukujKursy(List<Kurs> kurs) {
         if (kurs == null || kurs.isEmpty()) {
             System.out.println("Brak kursów");
@@ -160,6 +159,7 @@ public class KontenerDanych implements Serializable {
             }
         }
     }
+
     public void pokazWszystkichPracownikow() {
         var pracownicy = wyszukajPracownika(null, null, null, null, null, null);
         drukujListeWyszukanych(pracownicy);
@@ -175,8 +175,7 @@ public class KontenerDanych implements Serializable {
         drukujKursy(kursyStudentow);
     }
 
-    public void usunPracownika(int opcja, String wartosc)
-    {
+    public void usunPracownika(int opcja, String wartosc) {
         Iterator<Osoba> it = osoby.iterator();
         while (it.hasNext()) {
             Osoba o = it.next();
@@ -195,13 +194,11 @@ public class KontenerDanych implements Serializable {
                         }
                     }
                 }
-                if (doUsuniecia)
-                {
+                if (doUsuniecia) {
                     it.remove();
                     powiadom("Usunięto Pracownika: " + p.przedstawSie());
                     //                    break; zeby usuwało kazdego z wyszukanych
-                }
-                else System.out.println("Informacja: Nie znaleziono pracownika spełniającego podane kryteria.");
+                } else System.out.println("Informacja: Nie znaleziono pracownika spełniającego podane kryteria.");
             }
         }
     }
@@ -218,19 +215,16 @@ public class KontenerDanych implements Serializable {
                     case 3 -> doUsuniecia = String.valueOf(s.getNrIndeks()).equals(wartosc); //indeks
                     case 4 -> doUsuniecia = String.valueOf(s.getRokStudiow()).equals(wartosc); //rok
                 }
-                if (doUsuniecia)
-                {
+                if (doUsuniecia) {
                     it.remove();
                     powiadom("Usunieto studenta: " + s.przedstawSie());
 //                    break; zeby usuwało kazdego z wyszukanych
-                }
-                else System.out.println("Informacja: Nie znaleziono Studenta spełniającego podane kryteria.");
+                } else System.out.println("Informacja: Nie znaleziono Studenta spełniającego podane kryteria.");
             }
         }
     }
 
-    public void usunKurs(int opcja, String wartosc)
-    {
+    public void usunKurs(int opcja, String wartosc) {
         Iterator<Kurs> it = kursy.iterator();
         while (it.hasNext()) {
             Kurs k = it.next();
@@ -239,37 +233,31 @@ public class KontenerDanych implements Serializable {
                 case 1 -> doUsuniecia = k.getNazwa().equalsIgnoreCase(wartosc);
                 case 2 -> doUsuniecia = k.getProwadzacy().equalsIgnoreCase(wartosc);
                 case 3 -> {
-                    try{
+                    try {
                         doUsuniecia = k.getPunktyECTS() == Double.parseDouble(wartosc);
-                    }
-                    catch (NumberFormatException e){
+                    } catch (NumberFormatException e) {
                         System.out.println("Błąd. Punkty ECTS muszą byc liczba całkowita");
                     }
                 }
             }
-            if (doUsuniecia)
-            {
+            if (doUsuniecia) {
                 it.remove();
                 powiadom("Usunieto kurs: " + k.wyswietlDane());
                 //                    break; zeby usuwało kazdego z wyszukanych
-            }
-            else System.out.println("Informacja: Nie znaleziono kursu spełniającego podane kryteria.");
+            } else System.out.println("Informacja: Nie znaleziono kursu spełniającego podane kryteria.");
         }
     }
 
-    public void dodajObserwatora(IObserwator obs)
-    {
+    public void dodajObserwatora(IObserwator obs) {
         if (obsewatorzy == null) {
             obsewatorzy = new ArrayList();
         }
         obsewatorzy.add(obs);
     }
 
-    public void powiadom(String msg)
-    {
+    public void powiadom(String msg) {
         if (obsewatorzy == null) return;
-        for(IObserwator obs: obsewatorzy)
-        {
+        for (IObserwator obs : obsewatorzy) {
             obs.aktualizuj(msg, this);
         }
     }
@@ -293,8 +281,7 @@ public class KontenerDanych implements Serializable {
         System.out.println("------------------------------------\n");
     }
 
-    public void usunDuplikaty()
-    {
+    public void usunDuplikaty() {
         int rozmiarPrzed = osoby.size();
         HashSet<Osoba> setBezPowtorzen = new HashSet<>(osoby);
         osoby.clear();
@@ -302,6 +289,23 @@ public class KontenerDanych implements Serializable {
         int usunieto = rozmiarPrzed - osoby.size();
 
         powiadom("Nastąpiło czyszczenie bazy. Usunięto daną ilośc duplikatów: " + usunieto);
+    }
+
+    public void przypiszKursDoStudenta(int nrIndeks, Kurs kurs)
+    {
+        for(Osoba o: osoby)
+        {
+            if (o instanceof Student s && s.getNrIndeks()==nrIndeks) {
+                if (!s.getKursyList().contains(kurs))
+                {
+                    s.getKursyList().add(kurs);
+                    powiadom("Dodano kurs" + kurs.wyswietlDane() + " studentowi: " + s.przedstawSie());
+                }
+                else System.out.println("Student posiada juz taki kurs");
+                return;
+            }
+        }
+        System.out.println("Błąd. Nie znaleziono studenta o takim indeksie" + nrIndeks);
     }
 
 }

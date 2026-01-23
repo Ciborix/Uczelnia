@@ -1,7 +1,7 @@
-package uczelnia.strategia;
+package strategia;
 
-import uczelnia.osoba.pracownik.PracownikAdministracyjny;
-import uczelnia.osoba.pracownik.PracownikUczelni;
+import osoba.pracownik.PracownikAdministracyjny;
+import osoba.pracownik.PracownikUczelni;
 
 public class BonusAdministracyjny implements IBonusStrategia {
     @Override

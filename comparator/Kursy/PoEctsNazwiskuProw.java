@@ -1,6 +1,7 @@
-package uczelnia.comparator.Kursy;
+package comparator.Kursy;
 
-import uczelnia.osoba.student.Kurs;
+import osoba.student.Kurs;
+
 import java.util.Comparator;
 
 public class PoEctsNazwiskuProw implements Comparator<Kurs> {

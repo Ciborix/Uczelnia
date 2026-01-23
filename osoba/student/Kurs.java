@@ -1,6 +1,5 @@
-package uczelnia.osoba.student;
+package osoba.student;
 
-import uczelnia.osoba.PrzedstawSie;
 
 import java.io.Serializable;
 

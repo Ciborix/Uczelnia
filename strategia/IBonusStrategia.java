@@ -1,6 +1,7 @@
-package uczelnia.strategia;
+package strategia;
 
-import uczelnia.osoba.pracownik.PracownikUczelni;
+
+import osoba.pracownik.PracownikUczelni;
 
 import java.io.Serializable;
 

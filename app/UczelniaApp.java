@@ -1,10 +1,12 @@
-package uczelnia.app;
+package app;
 
-import uczelnia.Dane.KontenerDanych;
-import uczelnia.MenagerDanych;
-import uczelnia.IOTerminal;
-import uczelnia.Kontroler.Kontroler;
-import uczelnia.obserwator.*;
+
+import Dane.KontenerDanych;
+import Dane.MenagerDanych;
+import IOterminal.IOTerminal;
+import Kontroler.Kontroler;
+import obserwator.KonsolaInformator;
+import obserwator.MonitorStanu;
 
 public class UczelniaApp {
     public static void main(String[] args) {

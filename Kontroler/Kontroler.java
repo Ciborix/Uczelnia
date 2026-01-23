@@ -1,17 +1,17 @@
-package uczelnia.Kontroler;
+package Kontroler;
 
-import uczelnia.Dane.KontenerDanych;
-import uczelnia.IOTerminal;
-import uczelnia.MenagerDanych;
-import uczelnia.KreatorDanych;
-import uczelnia.comparator.Kursy.PoEctsNazwiskuProw;
-import uczelnia.comparator.Osoba.PoNazwisku;
-import uczelnia.comparator.Osoba.PoNazwiskuImieniu;
-import uczelnia.comparator.Osoba.PoNazwiskuWieku;
-import uczelnia.osoba.pracownik.PracownikBadawczoDydaktyczny;
-import uczelnia.osoba.pracownik.PracownikUczelni;
-import uczelnia.osoba.student.Kurs;
-import uczelnia.osoba.student.Student;
+
+import Dane.KontenerDanych;
+import Dane.KreatorDanych;
+import IOterminal.IOTerminal;
+import Dane.MenagerDanych;
+import comparator.Kursy.PoEctsNazwiskuProw;
+import comparator.Osoba.PoNazwisku;
+import comparator.Osoba.PoNazwiskuImieniu;
+import comparator.Osoba.PoNazwiskuWieku;
+import osoba.pracownik.PracownikUczelni;
+import osoba.student.Kurs;
+import osoba.student.Student;
 
 import java.util.List;
 import java.util.Scanner;
@@ -48,6 +48,7 @@ public class Kontroler {
 
             case 6 -> zarzadzajWyszukiwaniem();
             case 7 -> zarzadzajUsuwaniemDuplikatow();
+            case 8 -> zarzadzajDodawaniemKursuDoOsoby();
 
             case 10 -> zarzadzajZapisaniem();
             case 0 -> czyProgramDziala = false;
@@ -186,6 +187,22 @@ public class Kontroler {
                 menager.zapiszBaze(kontener);
                 menager.zapiszTXT(kontener, "uczelnia_baza.txt");
             }
+        }
+    }
+
+    public void zarzadzajDodawaniemKursuDoOsoby()
+    {
+        int nrIndeksu = terminal.ask("Podaj numer indeksu studenta, któremu chcesz dodac kurs");
+        List<Student> czyTaKiIstnieje = kontener.wyszukajStudenta(null,null,nrIndeksu,null,null);
+        if (czyTaKiIstnieje.isEmpty()) {
+            System.out.println("Nie znaleziono studenta!");
+            return;
+        }
+        Kurs wybranyKurs = terminal.wybierzKurs(kontener.getKursy());
+
+        if (wybranyKurs==null) System.out.println("Anulowano dodanie kursu studentowi");
+        else {
+            kontener.przypiszKursDoStudenta(nrIndeksu, wybranyKurs);
         }
     }
 }

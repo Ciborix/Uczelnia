@@ -1,8 +1,10 @@
-package uczelnia;
+package IOterminal;
+
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import osoba.student.Kurs;
 
 public class IOTerminal {
     private final Scanner scanner = new Scanner(System.in);
@@ -47,7 +49,7 @@ public class IOTerminal {
             try {
                 String input = scanner.nextLine().trim();
                 if (input.equalsIgnoreCase("null")) return null;
-                return Integer.parseInt(scanner.nextLine());
+                return Integer.parseInt(input);
             } catch (NumberFormatException e) {
                 System.out.println("Błąd: Wymagana liczba całkowita.");
             }
@@ -75,7 +77,7 @@ public class IOTerminal {
     }
 
     public int wyswietlMenuGlowne() {
-        return ask("\n--- SYSTEM ZARZĄDZANIA UCZELNIĄ ---\n1) Wyświetlanie\n2) Dodawanie\n3) Usuwanie\n4) Sortowanie\n5) Lista płac\n6) Wyszukiwanie\n7) Usuń duplikaty\n10) Zapisz\n0) Wyjście");
+        return ask("\n--- SYSTEM ZARZĄDZANIA UCZELNIĄ ---\n1) Wyświetlanie\n2) Dodawanie\n3) Usuwanie\n4) Sortowanie\n5) Lista płac\n6) Wyszukiwanie\n7) Usuń duplikaty\n8) Dodaj kurs do Studenta\n10) Zapisz\n0) Wyjście");
     }
 
     public int wybierzKategorieUsuwania() {
@@ -131,5 +133,23 @@ public class IOTerminal {
     public ArrayList<Integer> wybierzOpcjeWyszukaniaPracownika()
     {
         return askWielokrotne(""); //wyszukiwanie itp itd
+    }
+
+    public Kurs wybierzKurs(List<Kurs> dostepneKursy)
+    {
+        if (dostepneKursy.isEmpty())
+        {
+            System.out.println("Brak dostępnych kursów");
+            return null;
+        }
+        System.out.println("\n--- LISTA DOSTĘPNYCH KURSOW ---");
+        for(int i=0;i<dostepneKursy.size();i++)
+        {
+            System.out.println(i + ". " + dostepneKursy.get(i).wyswietlDane());
+        }
+
+        int wybor = ask("Wybierz numer kursu (lub -1 aby anulowac)");
+        if (wybor>=0 && wybor<dostepneKursy.size()) return dostepneKursy.get(wybor);
+        return null;
     }
 }

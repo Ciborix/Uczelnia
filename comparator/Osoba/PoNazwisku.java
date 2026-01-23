@@ -1,6 +1,7 @@
-package uczelnia.comparator.Osoba;
+package comparator.Osoba;
 
-import uczelnia.osoba.Osoba;
+
+import osoba.Osoba;
 
 import java.util.Comparator;
 
