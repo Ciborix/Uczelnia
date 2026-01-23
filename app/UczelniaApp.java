@@ -1,12 +1,12 @@
 package app;
 
 
-import Dane.KontenerDanych;
-import Dane.MenagerDanych;
-import IOterminal.IOTerminal;
-import Kontroler.Kontroler;
-import obserwator.KonsolaInformator;
-import obserwator.MonitorStanu;
+import model.Dane.KontenerDanych;
+import model.Dane.MenagerDanych;
+import model.IOterminal.IOTerminal;
+import model.Kontroler.Kontroler;
+import model.obserwator.KonsolaInformator;
+import model.obserwator.MonitorStanu;
 
 public class UczelniaApp {
     public static void main(String[] args) {
