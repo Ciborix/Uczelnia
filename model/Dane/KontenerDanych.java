@@ -3,6 +3,7 @@ package model.Dane;
 import model.obserwator.IObserwator;
 import model.osoba.Osoba;
 import model.osoba.pracownik.PracownikAdministracyjny;
+import model.osoba.pracownik.PracownikBadawczoDydaktyczny;
 import model.osoba.pracownik.PracownikUczelni;
 import model.osoba.student.Kurs;
 import model.osoba.student.Student;
@@ -308,4 +309,24 @@ public class KontenerDanych implements Serializable {
         System.out.println("Błąd. Nie znaleziono studenta o takim indeksie" + nrIndeks);
     }
 
+    public List<PracownikAdministracyjny> getPracownicyAdministracyjni()
+    {
+        return osoby.stream()
+                .filter(o -> o instanceof PracownikAdministracyjny)
+                .map(o -> (PracownikAdministracyjny)o)
+                .toList();
+    }
+
+    public List<PracownikBadawczoDydaktyczny> getPracownicyBadawczy()
+    {
+        return osoby.stream()
+                .filter(o-> o instanceof PracownikBadawczoDydaktyczny)
+                .map(o ->(PracownikBadawczoDydaktyczny)o)
+                .toList();
+    }
+
+    public List<Student> getStudenci()
+    {
+        return wyszukajStudenta(null,null,null,null,null);
+    }
 }

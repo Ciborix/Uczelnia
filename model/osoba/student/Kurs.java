@@ -24,10 +24,9 @@ public class Kurs implements Serializable {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("\n--------Kurs-----------\n");
-        sb.append("Nazwa: ").append(getNazwa()).append("\n");
-        sb.append("Prowadzacy: ").append(getProwadzacy()).append("\n");
-        sb.append("Punkty ECTS: ").append(getPunktyECTS()).append("\n");
+        sb.append(" Nazwa: ").append(getNazwa()).append("\n");
+        sb.append(" Prowadzacy: ").append(getProwadzacy()).append("\n");
+        sb.append(" Punkty ECTS: ").append(getPunktyECTS()).append("\n");
 
         return sb.toString();
     }

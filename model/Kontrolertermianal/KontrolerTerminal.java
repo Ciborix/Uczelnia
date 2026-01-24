@@ -1,4 +1,4 @@
-package model.Kontroler;
+package model.Kontrolertermianal;
 
 
 import model.Dane.KontenerDanych;
@@ -16,7 +16,7 @@ import model.osoba.student.Student;
 import java.util.List;
 import java.util.Scanner;
 
-public class Kontroler {
+public class KontrolerTerminal {
     private final KontenerDanych kontener;
     private final IOTerminal terminal;
     private final ManagerDanych menager;
@@ -24,7 +24,7 @@ public class Kontroler {
     private final Scanner scanner = new Scanner(System.in);
     private boolean czyProgramDziala = true;
 
-    public Kontroler(KontenerDanych kontener, ManagerDanych menager, IOTerminal terminal) {
+    public KontrolerTerminal(KontenerDanych kontener, ManagerDanych menager, IOTerminal terminal) {
         this.kontener = kontener;
         this.menager = menager;
         this.terminal = terminal;

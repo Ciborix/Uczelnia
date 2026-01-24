@@ -4,7 +4,7 @@ package app;
 import model.Dane.KontenerDanych;
 import model.Dane.ManagerDanych;
 import model.IOterminal.IOTerminal;
-import model.Kontroler.Kontroler;
+import model.Kontrolertermianal.KontrolerTerminal;
 import model.obserwator.KonsolaInformator;
 import model.obserwator.MonitorStanu;
 
@@ -15,7 +15,7 @@ public class UczelniaAppTerminal {
         KontenerDanych kontener = manager.wczytajBaze();
         kontener.dodajObserwatora(new KonsolaInformator());
         kontener.dodajObserwatora(new MonitorStanu());
-        Kontroler glownyKontroler = new Kontroler(kontener, manager, terminal);
-        glownyKontroler.start();
+        KontrolerTerminal glownyKontrolerTerminal = new KontrolerTerminal(kontener, manager, terminal);
+        glownyKontrolerTerminal.start();
     }
 }

@@ -1,4 +1,4 @@
-package gui;
+package gui.tabele;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -31,6 +31,21 @@ public class PanelPracownikowAdministracyjnych extends JPanel {
         add(tableContainer, BorderLayout.CENTER);
 
         tabela.setFillsViewportHeight(false);
+
+        tabela.addMouseListener(new java.awt.event.MouseAdapter() {
+            private int ostatniWiersz = -1;
+
+            @Override
+            public void mouseReleased(java.awt.event.MouseEvent e) {
+                int wiersz = tabela.getSelectedRow();
+                if (wiersz == ostatniWiersz && wiersz != -1) {
+                    tabela.clearSelection();
+                    ostatniWiersz = -1;
+                } else {
+                    ostatniWiersz = wiersz;
+                }
+            }
+        });
     }
 
     public DefaultTableModel getTableModel() {

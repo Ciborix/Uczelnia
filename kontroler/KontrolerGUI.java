@@ -1,16 +1,15 @@
 package kontroler;
 
 import gui.OknoGlowne;
-import gui.PanelPracownikowAdministracyjnych;
-import gui.PanelPracownikowBD;
-import gui.PanelStudentow;
+import gui.tabele.PanelKursow;
+import gui.tabele.PanelPracownikowAdministracyjnych;
+import gui.tabele.PanelPracownikowBD;
+import gui.tabele.PanelStudentow;
 import model.Dane.KontenerDanych;
 import model.Dane.ManagerDanych;
-import model.osoba.student.Kurs;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
 
 public class KontrolerGUI {
     private OknoGlowne okno;
@@ -20,6 +19,7 @@ public class KontrolerGUI {
     private KontrolerStudentow kontrolerStudentow;
     private KontrolerPracownikowA kontrolerPracownikowA;
     private KontrolerPracownikowBD kontrolerPracownikowBD;
+    private KontrolerKursow kontrolerKursow;
 
     public KontrolerGUI(OknoGlowne okno, KontenerDanych model, ManagerDanych manager) {
         this.okno = okno;
@@ -38,13 +38,19 @@ public class KontrolerGUI {
         PanelPracownikowBD panelPracownikowBD = new PanelPracownikowBD();
         this.kontrolerPracownikowBD = new KontrolerPracownikowBD(panelPracownikowBD,model);
 
+        PanelKursow panelKursow = new PanelKursow();
+        this.kontrolerKursow = new KontrolerKursow(panelKursow, model);
+
+
         panelStudentow.setAlignmentX(Component.LEFT_ALIGNMENT);
         panelPracownikowAdministracyjnych.setAlignmentX(Component.LEFT_ALIGNMENT);
         panelPracownikowBD.setAlignmentX(Component.LEFT_ALIGNMENT);
+        panelKursow.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         kontenerPionowy.add(panelStudentow);
         kontenerPionowy.add(panelPracownikowAdministracyjnych);
         kontenerPionowy.add(panelPracownikowBD);
+        kontenerPionowy.add(panelKursow);
 
         kontenerPionowy.add(Box.createVerticalGlue());
 
@@ -62,18 +68,46 @@ public class KontrolerGUI {
         JMenuItem zapisz = new JMenuItem("Zapisz");
         JMenuItem wyjscie = new JMenuItem("Wyjscie");
 
-        JMenuItem kursy = new JMenuItem("Kursy");
+        JMenu menuSpecjalne = new JMenu("Specjalne");
+        JMenuItem pokazKursy = new JMenuItem("Pokaz Kursy danej osoby");
+        JMenuItem dodajKursdoStudenta = new JMenuItem("Dodaj Kurs do wskazanej osoby");
 
-        kursy.addActionListener(e -> kontrolerStudentow.akcjaPokazKursy());
+        JMenu menuDodaj = new JMenu("Dodaj");
+        JMenuItem student = new JMenuItem("Student");
+        JMenuItem pracownikA = new JMenuItem("Pracownik Administracyjny");
+        JMenuItem pracownikBD = new JMenuItem("Pracownik Badawczo Dydaktyczny");
+        JMenuItem kursow = new JMenuItem("Kursy");
+
         zapisz.addActionListener(e -> manager.zapiszBaze(model));
-        wyjscie.addActionListener(e->System.exit(0));
+        wyjscie.addActionListener(e-> System.exit(  0));
+        pokazKursy.addActionListener(e -> kontrolerStudentow.akcjaPokazKursy());
+
+        student.addActionListener(e -> kontrolerStudentow.otworzFormularzDodawania());
+        pracownikA.addActionListener(e-> kontrolerPracownikowA.otworzFormularz());
+        pracownikBD.addActionListener(e-> kontrolerPracownikowBD.otworzFormularz());
+        kursow.addActionListener(e-> kontrolerKursow.akcjaDodajKurs());
 
         menuPlik.add(zapisz);
         menuPlik.addSeparator();
         menuPlik.add(wyjscie);
 
+        menuDodaj.add(student);
+        menuDodaj.addSeparator();
+        menuDodaj.add(pracownikA);
+        menuDodaj.addSeparator();
+        menuDodaj.add(pracownikBD);
+        menuDodaj.addSeparator();
+        menuDodaj.add(kursow);
+
         menuBar.add(menuPlik);
-        menuBar.add(kursy);
+
+        menuSpecjalne.add(pokazKursy);
+        menuSpecjalne.addSeparator();
+        menuSpecjalne.add(dodajKursdoStudenta);
+        menuBar.add(menuSpecjalne);
+
+        menuBar.add(menuDodaj);
         return menuBar;
     }
+
 }
