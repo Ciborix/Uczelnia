@@ -1,0 +1,58 @@
+package gui;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+
+public class PanelPracownikowBD extends JPanel {
+    private DefaultTableModel tableModel;
+    private JTable tabela;
+
+    public PanelPracownikowBD()
+    {
+        setLayout(new BorderLayout());
+        JLabel tytul = new JLabel("Lista Pracownikow Badawczo - Dydaktycznych", SwingConstants.CENTER);
+        add(tytul, BorderLayout.NORTH);
+        String[] kolumny = {"Imie", "Nazwisko", "Pesel", "Wiek", "Płeć", "Stanowisko", "Staz pracy", "Pensja", "Liczba publikacji", "Suma z bonusem"};
+
+        tableModel = new DefaultTableModel(kolumny, 0){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        tabela = new JTable(tableModel);
+
+        JPanel tableContainer = new JPanel(new BorderLayout());
+
+        tableContainer.add(tabela.getTableHeader(), BorderLayout.NORTH);
+        tableContainer.add(tabela, BorderLayout.CENTER);
+
+        add(tableContainer, BorderLayout.CENTER);
+
+        tabela.setFillsViewportHeight(false);
+    }
+
+    public DefaultTableModel getTableModel() {
+        return tableModel;
+    }
+
+    public JTable getTabela() {
+        return tabela;
+    }
+
+    public void ustawDane(Object[][] dane)
+    {
+        tableModel.setRowCount(0);
+        for(Object[] row : dane)
+        {
+            tableModel.addRow(row);
+        }
+    }
+    @Override
+    public Dimension getMaximumSize() {
+        Dimension pref = getPreferredSize();
+        return new Dimension(Integer.MAX_VALUE, pref.height);
+
+    }
+}

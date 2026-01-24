@@ -11,11 +11,11 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class MenagerDanych {
+public class ManagerDanych {
 
     private final String nazwaPliku;
 
-    public MenagerDanych(String nazwaPliku) {
+    public ManagerDanych(String nazwaPliku) {
         this.nazwaPliku = nazwaPliku;
     }
 

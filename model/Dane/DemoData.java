@@ -47,7 +47,6 @@ public class DemoData {
         Student student1 = new Student("Piotr", "Kowalski", "02121212345", 20, "M", 12345, 1, kursyList,false, true, false, true, false);
         Student student2 = new Student("Anna", "Kwiatkowska", "03221298765", 21, "K", 23456, 2, kursyList,false, true, false, true, false);
 
-
         kontener.dodajOsobe(profesorNowak);
         kontener.dodajOsobe(adiunktKowalska);
         kontener.dodajOsobe(adiunktKowalskaStarsza);

@@ -4,7 +4,7 @@ package model.Kontroler;
 import model.Dane.KontenerDanych;
 import model.Dane.KreatorDanych;
 import model.IOterminal.IOTerminal;
-import model.Dane.MenagerDanych;
+import model.Dane.ManagerDanych;
 import model.comparator.Kursy.PoEctsNazwiskuProw;
 import model.comparator.Osoba.PoNazwisku;
 import model.comparator.Osoba.PoNazwiskuImieniu;
@@ -19,12 +19,12 @@ import java.util.Scanner;
 public class Kontroler {
     private final KontenerDanych kontener;
     private final IOTerminal terminal;
-    private final MenagerDanych menager;
+    private final ManagerDanych menager;
     private final KreatorDanych kreator;
     private final Scanner scanner = new Scanner(System.in);
     private boolean czyProgramDziala = true;
 
-    public Kontroler(KontenerDanych kontener, MenagerDanych menager, IOTerminal terminal) {
+    public Kontroler(KontenerDanych kontener, ManagerDanych menager, IOTerminal terminal) {
         this.kontener = kontener;
         this.menager = menager;
         this.terminal = terminal;
