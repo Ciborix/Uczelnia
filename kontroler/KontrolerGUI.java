@@ -71,6 +71,7 @@ public class KontrolerGUI {
         JMenu menuSpecjalne = new JMenu("Specjalne");
         JMenuItem pokazKursy = new JMenuItem("Pokaz Kursy danej osoby");
         JMenuItem dodajKursdoStudenta = new JMenuItem("Dodaj Kurs do wskazanej osoby");
+        JMenuItem usunDuplikaty = new JMenuItem("Usun Duplikaty");
 
         JMenu menuDodaj = new JMenu("Dodaj");
         JMenuItem student = new JMenuItem("Student");
@@ -78,14 +79,27 @@ public class KontrolerGUI {
         JMenuItem pracownikBD = new JMenuItem("Pracownik Badawczo Dydaktyczny");
         JMenuItem kursow = new JMenuItem("Kursy");
 
+        JMenu menuUsun = new JMenu("Usun");
+        JMenuItem studentdel = new JMenuItem("Usun studenta");
+        JMenuItem pracownikAdel = new JMenuItem("Usun Pracownika Administracyjnego");
+        JMenuItem pracownikBDdel = new JMenuItem("Usun Pracownika Badawczo Dydaktycznego");
+        JMenuItem kursdel = new JMenuItem("Usun Kurs");
+
         zapisz.addActionListener(e -> manager.zapiszBaze(model));
         wyjscie.addActionListener(e-> System.exit(  0));
+
         pokazKursy.addActionListener(e -> kontrolerStudentow.akcjaPokazKursy());
+
 
         student.addActionListener(e -> kontrolerStudentow.otworzFormularzDodawania());
         pracownikA.addActionListener(e-> kontrolerPracownikowA.otworzFormularz());
         pracownikBD.addActionListener(e-> kontrolerPracownikowBD.otworzFormularz());
-        kursow.addActionListener(e-> kontrolerKursow.akcjaDodajKurs());
+        kursow.addActionListener(e-> kontrolerKursow.dodajKurs());
+
+        studentdel.addActionListener(e-> kontrolerStudentow.usunStudenta());
+        pracownikAdel.addActionListener(e-> kontrolerPracownikowA.usunPracownika());
+        pracownikBDdel.addActionListener(e-> kontrolerPracownikowBD.usunPracownika());
+        kursdel.addActionListener(e-> kontrolerKursow.usunKurs());
 
         menuPlik.add(zapisz);
         menuPlik.addSeparator();
@@ -104,9 +118,21 @@ public class KontrolerGUI {
         menuSpecjalne.add(pokazKursy);
         menuSpecjalne.addSeparator();
         menuSpecjalne.add(dodajKursdoStudenta);
+        menuSpecjalne.addSeparator();
+        menuSpecjalne.add(usunDuplikaty);
         menuBar.add(menuSpecjalne);
 
         menuBar.add(menuDodaj);
+
+        menuUsun.add(studentdel);
+        menuUsun.addSeparator();
+        menuUsun.add(pracownikAdel);
+        menuUsun.addSeparator();
+        menuUsun.add(pracownikBDdel);
+        menuUsun.addSeparator();
+        menuUsun.add(kursdel);
+        menuBar.add(menuUsun);
+
         return menuBar;
     }
 

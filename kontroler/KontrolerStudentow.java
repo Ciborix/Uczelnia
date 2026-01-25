@@ -4,6 +4,7 @@ import gui.DialogKursy;
 
 import gui.dodawanie.DodawanieStudenta;
 import gui.tabele.PanelStudentow;
+import gui.usuwanie.DialogUsuwania;
 import model.Dane.KontenerDanych;
 import model.obserwator.IObserwator;
 import model.osoba.student.Kurs;
@@ -137,5 +138,17 @@ public class KontrolerStudentow implements IObserwator{
                 indeks, rok, new java.util.ArrayList<>(d.getWybraneKursy()),
                 d.isErasmus(), s1, !s1, d.isStacjonarny(), !d.isStacjonarny()
         );
+    }
+
+    public void usunStudenta() {
+        String[] kryteria = {"Nazwisko", "Imię", "Numer Indeksu", "Rok Studiów"};
+        DialogUsuwania dialog = new DialogUsuwania(parentFrame, "Usuwanie Studenta", kryteria);
+        dialog.setVisible(true);
+
+        if (dialog.isZatwierdzono()) {
+            // Wywołujemy Twoją metodę z modelu
+            model.usunStudenta(dialog.getWybranyIndeksOpcji(), dialog.getWartosc());
+            // Dzięki Obserwatorowi tabela odświeży się sama!
+        }
     }
 }

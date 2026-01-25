@@ -178,6 +178,7 @@ public class KontenerDanych implements Serializable {
 
     public void usunPracownika(int opcja, String wartosc) {
         Iterator<Osoba> it = osoby.iterator();
+        boolean znaleziono = false;
         while (it.hasNext()) {
             Osoba o = it.next();
             if (o instanceof PracownikUczelni p) {
@@ -186,7 +187,7 @@ public class KontenerDanych implements Serializable {
                     case 1 -> doUsuniecia = p.getNazwisko().equalsIgnoreCase(wartosc); //nazwisko
                     case 2 -> doUsuniecia = p.getImie().equalsIgnoreCase(wartosc); //imie
                     case 4 -> doUsuniecia = p.getStanowisko().equalsIgnoreCase(wartosc); //stanowisko
-                    case 3 -> //staz pracy
+                    case 3 ->
                     {
                         try {
                             doUsuniecia = p.getStazPracy() == Double.parseDouble(wartosc);
@@ -197,15 +198,20 @@ public class KontenerDanych implements Serializable {
                 }
                 if (doUsuniecia) {
                     it.remove();
+                    znaleziono = true;
                     powiadom("Usunięto Pracownika: " + p.przedstawSie());
                     //                    break; zeby usuwało kazdego z wyszukanych
-                } else System.out.println("Informacja: Nie znaleziono pracownika spełniającego podane kryteria.");
+                }
             }
+        }
+        if (!znaleziono) {
+            System.out.println("Informacja: Nie znaleziono pracownika spełniającego podane kryteria.");
         }
     }
 
     public void usunStudenta(int opcja, String wartosc) {
         Iterator<Osoba> it = osoby.iterator();
+        boolean znaleziono = false;
         while (it.hasNext()) {
             Osoba o = it.next();
             if (o instanceof Student s) {
@@ -218,15 +224,20 @@ public class KontenerDanych implements Serializable {
                 }
                 if (doUsuniecia) {
                     it.remove();
+                    znaleziono = true;
                     powiadom("Usunieto studenta: " + s.przedstawSie());
 //                    break; zeby usuwało kazdego z wyszukanych
-                } else System.out.println("Informacja: Nie znaleziono Studenta spełniającego podane kryteria.");
+                }
             }
+        }
+        if (!znaleziono) {
+            System.out.println("Informacja: Nie znaleziono studenta spełniającego podane kryteria.");
         }
     }
 
     public void usunKurs(int opcja, String wartosc) {
         Iterator<Kurs> it = kursy.iterator();
+        boolean znaleziono = false;
         while (it.hasNext()) {
             Kurs k = it.next();
             boolean doUsuniecia = false;
@@ -243,9 +254,13 @@ public class KontenerDanych implements Serializable {
             }
             if (doUsuniecia) {
                 it.remove();
+                znaleziono = true;
                 powiadom("Usunieto kurs: " + k.wyswietlDane());
                 //                    break; zeby usuwało kazdego z wyszukanych
-            } else System.out.println("Informacja: Nie znaleziono kursu spełniającego podane kryteria.");
+            }
+        }
+        if (!znaleziono) {
+            System.out.println("Informacja: Nie znaleziono kursu spełniającego podane kryteria.");
         }
     }
 

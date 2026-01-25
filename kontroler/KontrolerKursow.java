@@ -3,6 +3,7 @@ package kontroler;
 import gui.dodawanie.DodawanieKurs;
 
 import gui.tabele.PanelKursow;
+import gui.usuwanie.DialogUsuwania;
 import model.Dane.KontenerDanych;
 import model.obserwator.IObserwator;
 import model.osoba.student.Kurs;
@@ -36,7 +37,7 @@ public class KontrolerKursow implements IObserwator {
         panel.ustawDane(dane);
     }
 
-    public void akcjaDodajKurs() {
+    public void dodajKurs() {
         DodawanieKurs dialog = new DodawanieKurs(null);
         dialog.setVisible(true);
 
@@ -60,6 +61,17 @@ public class KontrolerKursow implements IObserwator {
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Błąd: ECTS musi być liczbą całkowitą!");
             }
+        }
+    }
+    public void usunKurs() {
+        String[] opcje = {"Nazwa kursu", "Prowadzący", "Punkty ECTS"};
+
+        DialogUsuwania dialog = new DialogUsuwania(null, "Usuwanie Kursu", opcje);
+        dialog.setVisible(true);
+
+        if (dialog.isZatwierdzono()) {
+            model.usunKurs(dialog.getWybranyIndeksOpcji(), dialog.getWartosc());
+
         }
     }
 }

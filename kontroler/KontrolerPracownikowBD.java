@@ -2,6 +2,7 @@ package kontroler;
 
 import gui.dodawanie.DodawaniePracownikaBD;
 import gui.tabele.PanelPracownikowBD;
+import gui.usuwanie.DialogUsuwania;
 import model.Dane.KontenerDanych;
 import model.obserwator.IObserwator;
 import model.osoba.pracownik.PracownikBadawczoDydaktyczny;
@@ -88,6 +89,16 @@ public class KontrolerPracownikowBD implements IObserwator {
             JOptionPane.showMessageDialog(d, "Błąd formatu liczb!");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(d, ex.getMessage());
+        }
+    }
+
+    public void usunPracownika() {
+        String[] kryteria = {"Nazwisko", "Imię", "Staż pracy", "Stanowisko"};
+        DialogUsuwania dialog = new DialogUsuwania(null, "Usuwanie Pracownika Administracyjnego", kryteria);
+        dialog.setVisible(true);
+
+        if (dialog.isZatwierdzono()) {
+            model.usunPracownika(dialog.getWybranyIndeksOpcji(), dialog.getWartosc());
         }
     }
 }
