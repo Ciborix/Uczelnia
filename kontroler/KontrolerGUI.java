@@ -85,12 +85,15 @@ public class KontrolerGUI {
         JMenuItem pracownikBDdel = new JMenuItem("Usun Pracownika Badawczo Dydaktycznego");
         JMenuItem kursdel = new JMenuItem("Usun Kurs");
 
+        JMenu menuSort = new JMenu("Sort");
+        JMenuItem sortowanie = new JMenuItem("Sortowanie");
+
         zapisz.addActionListener(e -> manager.zapiszBaze(model));
         wyjscie.addActionListener(e-> System.exit(  0));
 
         pokazKursy.addActionListener(e -> kontrolerStudentow.akcjaPokazKursy());
         dodajKursdoStudenta.addActionListener(e-> kontrolerStudentow.akcjaPrzypiszKurs());
-        usunDuplikaty.addActionListener(e->akcjaUsunDuplikaty());
+        usunDuplikaty.addActionListener(e-> usunDuplikaty());
 
         student.addActionListener(e -> kontrolerStudentow.otworzFormularzDodawania());
         pracownikA.addActionListener(e-> kontrolerPracownikowA.otworzFormularz());
@@ -101,6 +104,8 @@ public class KontrolerGUI {
         pracownikAdel.addActionListener(e-> kontrolerPracownikowA.usunPracownika());
         pracownikBDdel.addActionListener(e-> kontrolerPracownikowBD.usunPracownika());
         kursdel.addActionListener(e-> kontrolerKursow.usunKurs());
+
+        sortowanie.addActionListener(e->sortujBaze());
 
         menuPlik.add(zapisz);
         menuPlik.addSeparator();
@@ -114,16 +119,13 @@ public class KontrolerGUI {
         menuDodaj.addSeparator();
         menuDodaj.add(kursow);
 
-        menuBar.add(menuPlik);
 
         menuSpecjalne.add(pokazKursy);
         menuSpecjalne.addSeparator();
         menuSpecjalne.add(dodajKursdoStudenta);
         menuSpecjalne.addSeparator();
         menuSpecjalne.add(usunDuplikaty);
-        menuBar.add(menuSpecjalne);
 
-        menuBar.add(menuDodaj);
 
         menuUsun.add(studentdel);
         menuUsun.addSeparator();
@@ -132,12 +134,19 @@ public class KontrolerGUI {
         menuUsun.add(pracownikBDdel);
         menuUsun.addSeparator();
         menuUsun.add(kursdel);
+
+        menuSort.add(sortowanie);
+
+        menuBar.add(menuPlik);
+        menuBar.add(menuSpecjalne);
+        menuBar.add(menuDodaj);
         menuBar.add(menuUsun);
+        menuBar.add(sortowanie);
 
         return menuBar;
     }
 
-    public void akcjaUsunDuplikaty() {
+    public void usunDuplikaty() {
         int rozmiarPrzed = model.getOsoby().size();
 
         model.usunDuplikaty();
@@ -158,4 +167,36 @@ public class KontrolerGUI {
         }
     }
 
+    public void sortujBaze() {
+        String[] opcje = {
+                "Osoby: Po nazwisku",
+                "Osoby: Nazwisko + Imię",
+                "Osoby: Nazwisko + Wiek (malejąco)",
+                "Kursy: ECTS + Nazwisko prowadzącego"
+        };
+
+        String wybor = (String) JOptionPane.showInputDialog(
+                okno,
+                "Wybierz kryterium sortowania:",
+                "Sortowanie danych",
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                opcje,
+                opcje[0]
+        );
+
+        if (wybor != null) {
+            if (wybor.equals(opcje[0])) {
+                model.getOsoby().sort(new model.comparator.Osoba.PoNazwisku());
+            } else if (wybor.equals(opcje[1])) {
+                model.getOsoby().sort(new model.comparator.Osoba.PoNazwiskuImieniu());
+            } else if (wybor.equals(opcje[2])) {
+                model.getOsoby().sort(new model.comparator.Osoba.PoNazwiskuWieku());
+            } else if (wybor.equals(opcje[3])) {
+                model.getKursy().sort(new model.comparator.Kursy.PoEctsNazwiskuProw());
+            }
+
+            model.powiadom("Baza danych została posortowana: " + wybor);
+        }
+    }
 }
