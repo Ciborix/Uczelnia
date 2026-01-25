@@ -7,6 +7,10 @@ import gui.tabele.PanelPracownikowBD;
 import gui.tabele.PanelStudentow;
 import model.Dane.KontenerDanych;
 import model.Dane.ManagerDanych;
+import model.comparator.Kursy.PoEctsNazwiskuProw;
+import model.comparator.Osoba.PoNazwisku;
+import model.comparator.Osoba.PoNazwiskuImieniu;
+import model.comparator.Osoba.PoNazwiskuWieku;
 
 import javax.swing.*;
 import java.awt.*;
@@ -85,14 +89,13 @@ public class KontrolerGUI {
         JMenuItem pracownikBDdel = new JMenuItem("Usun Pracownika Badawczo Dydaktycznego");
         JMenuItem kursdel = new JMenuItem("Usun Kurs");
 
-        JMenu menuSort = new JMenu("Sort");
-        JMenuItem sortowanie = new JMenuItem("Sortowanie");
 
         JMenu menuWyszukwanie = new JMenu("Wyszukiwanie");
         JMenuItem wyszukajStudenta = new JMenuItem("Wyszukaj studenta");
         JMenuItem wyszukajPracownikaA = new JMenuItem("Wyszukaj Pracownika Administracyjnego");
         JMenuItem wyszukaPracownikaBD = new JMenuItem("Wyszukaj Pracownika Badawczo Dydaktycznego");
         JMenuItem wyszukajKurs = new  JMenuItem("Wyszukaj Kurs");
+        JMenuItem pokazWszystko = new JMenuItem("Pokaz wszystko - zdejmij filtry");
 
         zapisz.addActionListener(e -> manager.zapiszBaze(model));
         wyjscie.addActionListener(e-> System.exit(  0));
@@ -111,12 +114,14 @@ public class KontrolerGUI {
         pracownikBDdel.addActionListener(e-> kontrolerPracownikowBD.usunPracownika());
         kursdel.addActionListener(e-> kontrolerKursow.usunKurs());
 
-        sortowanie.addActionListener(e->sortujBaze());
+
+
 
         wyszukajStudenta.addActionListener(e->kontrolerStudentow.wyszukajStudenta());
         wyszukajPracownikaA.addActionListener(e->kontrolerPracownikowA.szukajPracownika());
         wyszukaPracownikaBD.addActionListener(e->kontrolerPracownikowBD.szukajPracownika());
         wyszukajKurs.addActionListener(e->kontrolerKursow.szukajKursow());
+        pokazWszystko.addActionListener(e->pokazWszystkich());
 
         menuPlik.add(zapisz);
         menuPlik.addSeparator();
@@ -146,7 +151,6 @@ public class KontrolerGUI {
         menuUsun.addSeparator();
         menuUsun.add(kursdel);
 
-        menuSort.add(sortowanie);
 
         menuWyszukwanie.add(wyszukajStudenta);
         menuWyszukwanie.addSeparator();
@@ -155,12 +159,15 @@ public class KontrolerGUI {
         menuWyszukwanie.add(wyszukaPracownikaBD);
         menuWyszukwanie.addSeparator();
         menuWyszukwanie.add(wyszukajKurs);
+        menuWyszukwanie.addSeparator();
+        menuWyszukwanie.add(pokazWszystko);
 
         menuBar.add(menuPlik);
         menuBar.add(menuSpecjalne);
         menuBar.add(menuDodaj);
         menuBar.add(menuUsun);
-        menuBar.add(sortowanie);
+        Sortowanie menuSortowania = new Sortowanie(model);
+        menuBar.add(menuSortowania.stworzMenuSortowania());
         menuBar.add(menuWyszukwanie);
 
         return menuBar;
@@ -186,37 +193,14 @@ public class KontrolerGUI {
                     JOptionPane.INFORMATION_MESSAGE);
         }
     }
+    public void pokazWszystkich() {
 
-    public void sortujBaze() {
-        String[] opcje = {
-                "Osoby: Po nazwisku",
-                "Osoby: Nazwisko + Imię",
-                "Osoby: Nazwisko + Wiek (malejąco)",
-                "Kursy: ECTS + Nazwisko prowadzącego"
-        };
+        kontrolerStudentow.odswierzTabeleStudentow();
+        kontrolerPracownikowA.odswiezTabelePracownikowA();
+        kontrolerPracownikowBD.odswiezTabelePracownikowPB();
+        kontrolerKursow.odswiez();
 
-        String wybor = (String) JOptionPane.showInputDialog(
-                okno,
-                "Wybierz kryterium sortowania:",
-                "Sortowanie danych",
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                opcje,
-                opcje[0]
-        );
-
-        if (wybor != null) {
-            if (wybor.equals(opcje[0])) {
-                model.getOsoby().sort(new model.comparator.Osoba.PoNazwisku());
-            } else if (wybor.equals(opcje[1])) {
-                model.getOsoby().sort(new model.comparator.Osoba.PoNazwiskuImieniu());
-            } else if (wybor.equals(opcje[2])) {
-                model.getOsoby().sort(new model.comparator.Osoba.PoNazwiskuWieku());
-            } else if (wybor.equals(opcje[3])) {
-                model.getKursy().sort(new model.comparator.Kursy.PoEctsNazwiskuProw());
-            }
-
-            model.powiadom("Baza danych została posortowana: " + wybor);
-        }
+        System.out.println("[INFO] Filtry zdjęte. Wyświetlam pełną bazę danych.");
     }
+
 }
