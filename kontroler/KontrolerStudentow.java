@@ -2,6 +2,7 @@ package kontroler;
 
 import gui.DialogKursy;
 
+import gui.dodawanie.DialogPrzypisaniaKursu;
 import gui.dodawanie.DodawanieStudenta;
 import gui.tabele.PanelStudentow;
 import gui.usuwanie.DialogUsuwania;
@@ -149,6 +150,33 @@ public class KontrolerStudentow implements IObserwator{
             // Wywołujemy Twoją metodę z modelu
             model.usunStudenta(dialog.getWybranyIndeksOpcji(), dialog.getWartosc());
             // Dzięki Obserwatorowi tabela odświeży się sama!
+        }
+    }
+    public void akcjaPrzypiszKurs() {
+        // 1. Otwieramy okno z listami [cite: 2026-01-21]
+        DialogPrzypisaniaKursu dialog = new DialogPrzypisaniaKursu(
+                parentFrame,
+                model.getOsoby(),
+                model.getKursy()
+        );
+        dialog.setVisible(true);
+
+        if (dialog.isZatwierdzono()) {
+            try {
+                // 2. WYPROWADZAMY DANE NA LEWO [cite: 2026-01-21]
+                int indeks = Integer.parseInt(dialog.getWybranyIndeks());
+                Kurs wybranyKurs = dialog.getWybranyKurs(); // Wyciągamy obiekt, nie String!
+
+                // 3. PODSTAWIAMY DO MODELU [cite: 2026-01-21]
+                model.przypiszKursDoStudenta(indeks, wybranyKurs);
+
+                // Informacja o sukcesie [cite: 2026-01-09]
+                System.out.println("[POWIADOMIENIE] Przypisano kurs: " + wybranyKurs.getNazwa() + " studentowi: " + indeks);
+
+            } catch (NumberFormatException e) {
+                // Ostrzeżenie przed błędami początkujących [cite: 2026-01-09]
+                JOptionPane.showMessageDialog(parentFrame, "Błąd: Nieprawidłowy numer indeksu!");
+            }
         }
     }
 }

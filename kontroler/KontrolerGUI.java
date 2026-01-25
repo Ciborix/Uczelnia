@@ -89,7 +89,8 @@ public class KontrolerGUI {
         wyjscie.addActionListener(e-> System.exit(  0));
 
         pokazKursy.addActionListener(e -> kontrolerStudentow.akcjaPokazKursy());
-
+        dodajKursdoStudenta.addActionListener(e-> kontrolerStudentow.akcjaPrzypiszKurs());
+        usunDuplikaty.addActionListener(e->akcjaUsunDuplikaty());
 
         student.addActionListener(e -> kontrolerStudentow.otworzFormularzDodawania());
         pracownikA.addActionListener(e-> kontrolerPracownikowA.otworzFormularz());
@@ -134,6 +135,27 @@ public class KontrolerGUI {
         menuBar.add(menuUsun);
 
         return menuBar;
+    }
+
+    public void akcjaUsunDuplikaty() {
+        int rozmiarPrzed = model.getOsoby().size();
+
+        model.usunDuplikaty();
+
+        int rozmiarPo = model.getOsoby().size();
+        int usunieto = rozmiarPrzed - rozmiarPo;
+
+        if (usunieto > 0) {
+            JOptionPane.showMessageDialog(okno,
+                    "Czyszczenie zakończone!\nUsunięto duplikaty w liczbie: " + usunieto,
+                    "Porządki w bazie",
+                    JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(okno,
+                    "Baza jest czysta. Nie znaleziono żadnych duplikatów.",
+                    "Informacja",
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
 }
