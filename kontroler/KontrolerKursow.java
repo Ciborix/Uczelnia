@@ -4,6 +4,7 @@ import gui.dodawanie.DodawanieKurs;
 
 import gui.tabele.PanelKursow;
 import gui.usuwanie.DialogUsuwania;
+import gui.wyszukiwanie.DialogWyszukiwaniaKursow;
 import model.Dane.KontenerDanych;
 import model.obserwator.IObserwator;
 import model.osoba.student.Kurs;
@@ -17,7 +18,7 @@ public class KontrolerKursow implements IObserwator {
     public KontrolerKursow(PanelKursow panel, KontenerDanych model) {
         this.panel = panel;
         this.model = model;
-        this.model.dodajObserwatora(this); // Rejestracja!
+        this.model.dodajObserwatora(this);
         odswiez();
     }
 
@@ -43,19 +44,17 @@ public class KontrolerKursow implements IObserwator {
 
         if (dialog.isZatwierdzono()) {
             try {
-                // Wyprowadzamy szukaną na lewą stronę
+
                 String nazwa = dialog.getNazwa();
                 String prowadzacy = dialog.getProwadzacy();
                 int ects = Integer.parseInt(dialog.getEctsRaw());
 
-                // Tworzymy obiekt - trik: używamy Twojego konstruktora
+
                 Kurs nowyKurs = new Kurs(nazwa, prowadzacy, ects);
 
-                // Dodajemy do bazy
+
                 model.dodajKurs(nowyKurs);
 
-                // Ostrzeżenie: Twoje tabele w BoxLayout muszą wiedzieć o zmianie!
-                // Jeśli masz panel wyświetlający same kursy, wywołaj jego odświeżenie.
                 JOptionPane.showMessageDialog(null, "Dodano kurs: " + nazwa);
 
             } catch (NumberFormatException e) {
@@ -73,5 +72,32 @@ public class KontrolerKursow implements IObserwator {
             model.usunKurs(dialog.getWybranyIndeksOpcji(), dialog.getWartosc());
 
         }
+    }
+
+    public void szukajKursow() {
+        DialogWyszukiwaniaKursow d = new DialogWyszukiwaniaKursow(null);
+        d.setVisible(true);
+
+        if (d.isZatwierdzono()) {
+            var wyniki = model.wyszukajKurs(
+                    d.getNazwa(),
+                    d.getProwadzacy(),
+                    d.getEcts()
+            );
+
+            wyswietlWynikiWyszukiwania(wyniki);
+        }
+    }
+
+    private void wyswietlWynikiWyszukiwania(List<Kurs> lista) {
+
+        Object[][] dane = new Object[lista.size()][3];
+        for(int i = 0; i < lista.size(); i++) {
+            var k = lista.get(i);
+            dane[i][0] = k.getNazwa();
+            dane[i][1] = k.getProwadzacy();
+            dane[i][2] = k.getPunktyECTS();
+        }
+        panel.ustawDane(dane);
     }
 }

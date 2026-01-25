@@ -120,10 +120,8 @@ public class ManagerDanych {
         try (PrintWriter pw = new PrintWriter(new File(nazwa))) {
             for (Osoba o : kontener.getOsoby()) {
                 if (o instanceof Student s) {
-                    // Ustalamy typ: S dla braku kursów, SK jeśli jakieś ma
-                    String typ = s.getKursyList().isEmpty() ? "S" : "SK";
 
-                    // Budujemy podstawową linię (indeksy 0-12)
+                    String typ = s.getKursyList().isEmpty() ? "S" : "SK";
                     StringBuilder sb = new StringBuilder();
                     sb.append(typ).append(";")
                             .append(s.getImie()).append(";")

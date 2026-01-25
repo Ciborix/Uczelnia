@@ -7,7 +7,7 @@ public class Kurs implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String nazwa;
-    private String prowadzacy; //mozliwosc zmiany na zwyklego stringa
+    private String prowadzacy;
     private int punktyECTS;
 
     public Kurs(String nazwa, String prowadzacy, int punktyECTS) {

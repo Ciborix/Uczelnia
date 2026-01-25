@@ -3,6 +3,7 @@ package kontroler;
 import gui.dodawanie.DodawaniePracownikaBD;
 import gui.tabele.PanelPracownikowBD;
 import gui.usuwanie.DialogUsuwania;
+import gui.wyszukiwanie.DialogWyszukiwaniaPracownika;
 import model.Dane.KontenerDanych;
 import model.obserwator.IObserwator;
 import model.osoba.pracownik.PracownikBadawczoDydaktyczny;
@@ -53,35 +54,35 @@ public class KontrolerPracownikowBD implements IObserwator {
     }
 
     public void otworzFormularz() {
-        DodawaniePracownikaBD dialog = new DodawaniePracownikaBD(null); // lub parentFrame
+        DodawaniePracownikaBD dialog = new DodawaniePracownikaBD(null);
         dialog.getBtnZapisz().addActionListener(e -> wykonajZapis(dialog));
         dialog.setVisible(true);
     }
 
     private void wykonajZapis(DodawaniePracownikaBD d) {
         try {
-            // 1. Walidacja formatu
+
             double pensja = Double.parseDouble(d.getPensjaStr());
             double staz = Double.parseDouble(d.getStazStr());
             int wiek = Integer.parseInt(d.getWiekStr());
             int publikacje = Integer.parseInt(d.getPublikacje());
 
-            // 2. Walidacja merytoryczna (Trik z logicznym błędem)
+
             if (staz > (wiek - 18)) {
                 throw new Exception("Staż pracy nie może być dłuższy niż wiek dorosły pracownika!");
             }
             if (pensja < 0) throw new Exception("Pensja nie może być ujemna!");
 
-            // 3. Tworzenie obiektu
+
             PracownikBadawczoDydaktyczny pa = new PracownikBadawczoDydaktyczny(
                     d.getImie(), d.getNazwisko(), d.getPesel(), wiek, d.getPlec(),
                     d.getStanowisko(), staz, pensja, publikacje
             );
 
-            // 4. PRZYPISANIE STRATEGII (Lista nr 6 - Wzorce)
+
             pa.setBonusStategia(new BonusAdministracyjny());
 
-            // 5. Dodanie do bazy
+
             model.dodajOsobe(pa);
             d.dispose();
 
@@ -100,5 +101,43 @@ public class KontrolerPracownikowBD implements IObserwator {
         if (dialog.isZatwierdzono()) {
             model.usunPracownika(dialog.getWybranyIndeksOpcji(), dialog.getWartosc());
         }
+    }
+
+
+    public void szukajPracownika() {
+        DialogWyszukiwaniaPracownika d = new DialogWyszukiwaniaPracownika(null);
+        d.setVisible(true);
+
+        if (d.isZatwierdzono()) {
+            var wyniki = model.wyszukajPracownika(
+                    d.getNazwisko(), d.getImie(), d.getStanowisko(),
+                    d.getStaz(), null, d.getPensja()
+            );
+
+            List<PracownikBadawczoDydaktyczny> lista = wyniki.stream()
+                    .filter(p -> p instanceof PracownikBadawczoDydaktyczny)
+                    .map(p -> (PracownikBadawczoDydaktyczny)p)
+                    .toList();
+
+            wyswietlWynikiWyszukiwania(lista);
+        }
+    }
+
+    private void wyswietlWynikiWyszukiwania(List<PracownikBadawczoDydaktyczny> lista) {
+        Object[][] dane = new Object[lista.size()][10];
+        for(int i = 0; i < lista.size(); i++) {
+            var pb = lista.get(i);
+            dane[i][0] = pb.getImie();
+            dane[i][1] = pb.getNazwisko();
+            dane[i][2] = pb.getPesel();
+            dane[i][3] = pb.getWiek();
+            dane[i][4] = pb.getPlec().equalsIgnoreCase("M") ? "Mężczyzna" : "Kobieta";
+            dane[i][5] = pb.getStanowisko();
+            dane[i][6] = pb.getStazPracy();
+            dane[i][7] = pb.getPensja();
+            dane[i][8] = pb.getLiczbaPublikacji();
+            dane[i][9] = pb.getSumaWyplaty() + "zł";
+        }
+        panelPracownikowBD.ustawDane(dane);
     }
 }

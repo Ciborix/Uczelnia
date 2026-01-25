@@ -32,7 +32,7 @@ public class DodawaniePracownikaBD extends JDialog {
         setLocationRelativeTo(parent);
     }
 
-    // Gettery (txtImie.getText(), txtPesel.getText(), itd.)
+
     public String getImie() { return txtImie.getText(); }
     public String getNazwisko() { return txtNazwisko.getText(); }
     public String getPesel() { return txtPesel.getText(); }

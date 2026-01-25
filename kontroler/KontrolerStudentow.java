@@ -3,9 +3,11 @@ package kontroler;
 import gui.DialogKursy;
 
 import gui.dodawanie.DialogPrzypisaniaKursu;
+import gui.wyszukiwanie.DialogWyszukiwaniaStudenta;
 import gui.dodawanie.DodawanieStudenta;
 import gui.tabele.PanelStudentow;
 import gui.usuwanie.DialogUsuwania;
+
 import model.Dane.KontenerDanych;
 import model.obserwator.IObserwator;
 import model.osoba.student.Kurs;
@@ -91,7 +93,7 @@ public class KontrolerStudentow implements IObserwator{
         return daneDlaTabeli;
     }
 
-    // Metoda wywoływana np. z przycisku w menu głównym
+
     public void otworzFormularzDodawania() {
         List<Kurs> kursyZModelu = model.getKursy();
         DodawanieStudenta dialog = new DodawanieStudenta(parentFrame, kursyZModelu);
@@ -102,13 +104,8 @@ public class KontrolerStudentow implements IObserwator{
 
     private void wykonajZapis(DodawanieStudenta dialog) {
         try {
-            // 1. Walidacja i tworzenie obiektu
             Student nowy = walidujITworz(dialog);
-
-            // 2. Dodanie do modelu -> to odpali powiadom()
             model.dodajOsobe(nowy);
-
-            // 3. Sukces - zamykamy okno
             dialog.dispose();
 
         } catch (ValidationException ex) {
@@ -119,7 +116,7 @@ public class KontrolerStudentow implements IObserwator{
     }
 
     private Student walidujITworz(DodawanieStudenta d) throws ValidationException {
-        // Pobieranie danych
+
         String imie = d.getImie().trim();
         String nazwisko = d.getNazwisko().trim();
         int wiek = Integer.parseInt(d.getWiekStr());
@@ -127,13 +124,11 @@ public class KontrolerStudentow implements IObserwator{
         int rok = d.getRok();
         boolean s1 = d.isStopien1();
 
-        // WALIDACJA MERYTORYCZNA
         if (imie.isEmpty() || nazwisko.isEmpty()) throw new ValidationException("Uzupełnij imię i nazwisko!");
         if (wiek < 18 || wiek > 100) throw new ValidationException("Niepoprawny wiek (18-100)!");
         if (s1 && rok > 4) throw new ValidationException("I stopień to max 4 rok!");
         if (!s1 && rok > 2) throw new ValidationException("II stopień to max 2 rok!");
 
-        // Zwracamy gotowy obiekt
         return new Student(
                 imie, nazwisko, d.getPesel(), wiek, d.getPlec(),
                 indeks, rok, new java.util.ArrayList<>(d.getWybraneKursy()),
@@ -147,13 +142,10 @@ public class KontrolerStudentow implements IObserwator{
         dialog.setVisible(true);
 
         if (dialog.isZatwierdzono()) {
-            // Wywołujemy Twoją metodę z modelu
             model.usunStudenta(dialog.getWybranyIndeksOpcji(), dialog.getWartosc());
-            // Dzięki Obserwatorowi tabela odświeży się sama!
         }
     }
-    public void akcjaPrzypiszKurs() {
-        // 1. Otwieramy okno z listami [cite: 2026-01-21]
+    public void przypiszKurs() {
         DialogPrzypisaniaKursu dialog = new DialogPrzypisaniaKursu(
                 parentFrame,
                 model.getOsoby(),
@@ -163,20 +155,52 @@ public class KontrolerStudentow implements IObserwator{
 
         if (dialog.isZatwierdzono()) {
             try {
-                // 2. WYPROWADZAMY DANE NA LEWO [cite: 2026-01-21]
                 int indeks = Integer.parseInt(dialog.getWybranyIndeks());
-                Kurs wybranyKurs = dialog.getWybranyKurs(); // Wyciągamy obiekt, nie String!
+                Kurs wybranyKurs = dialog.getWybranyKurs();
 
-                // 3. PODSTAWIAMY DO MODELU [cite: 2026-01-21]
                 model.przypiszKursDoStudenta(indeks, wybranyKurs);
-
-                // Informacja o sukcesie [cite: 2026-01-09]
                 System.out.println("[POWIADOMIENIE] Przypisano kurs: " + wybranyKurs.getNazwa() + " studentowi: " + indeks);
 
             } catch (NumberFormatException e) {
-                // Ostrzeżenie przed błędami początkujących [cite: 2026-01-09]
                 JOptionPane.showMessageDialog(parentFrame, "Błąd: Nieprawidłowy numer indeksu!");
             }
         }
+    }
+
+    public void wyszukajStudenta() {
+        DialogWyszukiwaniaStudenta dialog = new DialogWyszukiwaniaStudenta(parentFrame);
+        dialog.setVisible(true);
+
+        if (dialog.isZatwierdzono()) {
+            var wyniki = model.wyszukajStudenta(
+                    dialog.getNazwisko(),
+                    dialog.getImie(),
+                    dialog.getIndeks(),
+                    dialog.getRok(),
+                    dialog.getKurs()
+            );
+
+
+            aktualizujWidokTabeli(wyniki);
+        }
+    }
+
+
+    private void aktualizujWidokTabeli(List<Student> lista) {
+        Object[][] dane = new Object[lista.size()][10];
+        for(int i = 0; i < lista.size(); i++) {
+            Student s = lista.get(i);
+            dane[i][0] = s.getImie();
+            dane[i][1] = s.getNazwisko();
+            dane[i][2] = s.getPesel();
+            dane[i][3] = s.getWiek();
+            dane[i][4] = s.getPlec().equalsIgnoreCase("M") ? "Mężczyzna" : "Kobieta";
+            dane[i][5] = s.getNrIndeks();
+            dane[i][6] = s.getRokStudiow();
+            dane[i][7] = s.isCzyERASMUS() ? "Tak": "Nie";
+            dane[i][8] = s.isCzyIStopien() ? "1 stopień": "2 stopień";
+            dane[i][9] = s.isCzyStacjonarny() ? "Stacjonarnie" : "Niestacjonarnie";
+        }
+        panelStudentow.ustawDane(dane);
     }
 }

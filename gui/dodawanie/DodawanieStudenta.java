@@ -26,7 +26,6 @@ public class DodawanieStudenta extends JDialog {
         super(parent, "Dodaj nowego studenta", true);
         setLayout(new BorderLayout(10, 10));
 
-        // Panel formularza
         JPanel pnlForm = new JPanel(new GridLayout(0, 2, 5, 5));
         pnlForm.add(new JLabel(" Imię:")); pnlForm.add(txtImie);
         pnlForm.add(new JLabel(" Nazwisko:")); pnlForm.add(txtNazwisko);
@@ -38,7 +37,6 @@ public class DodawanieStudenta extends JDialog {
         pnlForm.add(new JLabel(" Stopień:")); pnlForm.add(comboStopien);
         pnlForm.add(chkErasmus); pnlForm.add(chkStacjonarny);
 
-        // Panel kursów
         DefaultListModel<Kurs> listModel = new DefaultListModel<>();
         for (Kurs k : dostepneKursy) listModel.addElement(k);
         listaKursow = new JList<>(listModel);
@@ -56,7 +54,6 @@ public class DodawanieStudenta extends JDialog {
         setLocationRelativeTo(parent);
     }
 
-    // Gettery do pobierania danych
     public String getImie() { return txtImie.getText(); }
     public String getNazwisko() { return txtNazwisko.getText(); }
     public String getPesel() { return txtPesel.getText(); }

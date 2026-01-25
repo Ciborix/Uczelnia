@@ -130,10 +130,6 @@ public class IOTerminal {
                 "4. Zapisac serializacje\n " +
                 "5. Zapisac serializacje i txt owczesnych plików\n");
     }
-    public ArrayList<Integer> wybierzOpcjeWyszukaniaPracownika()
-    {
-        return askWielokrotne(""); //wyszukiwanie itp itd
-    }
 
     public Kurs wybierzKurs(List<Kurs> dostepneKursy)
     {

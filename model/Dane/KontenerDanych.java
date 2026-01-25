@@ -112,7 +112,7 @@ public class KontenerDanych implements Serializable {
                         boolean found = false;
                         for (Kurs kurs : k) {
                             String nazwa_wewnetrzna = kurs.getNazwa();
-                            if (nazwa_wewnetrzna.equals(nazwaKursu)) {
+                            if (nazwa_wewnetrzna.equalsIgnoreCase(nazwaKursu)) {
                                 found = true;
                                 break;
                             }
@@ -135,7 +135,7 @@ public class KontenerDanych implements Serializable {
         for (Kurs k : kursy) {
             boolean ok = true;
             if (nazwa != null && !k.getNazwa().equalsIgnoreCase(nazwa)) ok = false;
-            if (prowadzacy != null && !k.getProwadzacy().equals(prowadzacy)) ok = false;
+            if (prowadzacy != null && !k.getProwadzacy().equalsIgnoreCase(prowadzacy)) ok = false;
             if (ECTS != null && !ECTS.equals(k.getPunktyECTS())) ok = false;
             if (ok) wynik.add(k);
         }

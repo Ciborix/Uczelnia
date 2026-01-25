@@ -88,11 +88,17 @@ public class KontrolerGUI {
         JMenu menuSort = new JMenu("Sort");
         JMenuItem sortowanie = new JMenuItem("Sortowanie");
 
+        JMenu menuWyszukwanie = new JMenu("Wyszukiwanie");
+        JMenuItem wyszukajStudenta = new JMenuItem("Wyszukaj studenta");
+        JMenuItem wyszukajPracownikaA = new JMenuItem("Wyszukaj Pracownika Administracyjnego");
+        JMenuItem wyszukaPracownikaBD = new JMenuItem("Wyszukaj Pracownika Badawczo Dydaktycznego");
+        JMenuItem wyszukajKurs = new  JMenuItem("Wyszukaj Kurs");
+
         zapisz.addActionListener(e -> manager.zapiszBaze(model));
         wyjscie.addActionListener(e-> System.exit(  0));
 
         pokazKursy.addActionListener(e -> kontrolerStudentow.akcjaPokazKursy());
-        dodajKursdoStudenta.addActionListener(e-> kontrolerStudentow.akcjaPrzypiszKurs());
+        dodajKursdoStudenta.addActionListener(e-> kontrolerStudentow.przypiszKurs());
         usunDuplikaty.addActionListener(e-> usunDuplikaty());
 
         student.addActionListener(e -> kontrolerStudentow.otworzFormularzDodawania());
@@ -106,6 +112,11 @@ public class KontrolerGUI {
         kursdel.addActionListener(e-> kontrolerKursow.usunKurs());
 
         sortowanie.addActionListener(e->sortujBaze());
+
+        wyszukajStudenta.addActionListener(e->kontrolerStudentow.wyszukajStudenta());
+        wyszukajPracownikaA.addActionListener(e->kontrolerPracownikowA.szukajPracownika());
+        wyszukaPracownikaBD.addActionListener(e->kontrolerPracownikowBD.szukajPracownika());
+        wyszukajKurs.addActionListener(e->kontrolerKursow.szukajKursow());
 
         menuPlik.add(zapisz);
         menuPlik.addSeparator();
@@ -137,11 +148,20 @@ public class KontrolerGUI {
 
         menuSort.add(sortowanie);
 
+        menuWyszukwanie.add(wyszukajStudenta);
+        menuWyszukwanie.addSeparator();
+        menuWyszukwanie.add(wyszukajPracownikaA);
+        menuWyszukwanie.addSeparator();
+        menuWyszukwanie.add(wyszukaPracownikaBD);
+        menuWyszukwanie.addSeparator();
+        menuWyszukwanie.add(wyszukajKurs);
+
         menuBar.add(menuPlik);
         menuBar.add(menuSpecjalne);
         menuBar.add(menuDodaj);
         menuBar.add(menuUsun);
         menuBar.add(sortowanie);
+        menuBar.add(menuWyszukwanie);
 
         return menuBar;
     }
