@@ -35,6 +35,8 @@ public class DodawanieKurs extends JDialog {
             dispose();
         });
         add(btnOk);
+        this.pack();
+        this.setLocationRelativeTo(parent);
     }
 
     public boolean isZatwierdzono() { return zatwierdzono; }

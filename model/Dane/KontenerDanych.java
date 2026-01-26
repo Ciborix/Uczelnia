@@ -255,6 +255,7 @@ public class KontenerDanych implements Serializable {
             if (doUsuniecia) {
                 it.remove();
                 znaleziono = true;
+                usunReferencjeDoKursuUStudentow(k);
                 powiadom("Usunieto kurs: " + k.wyswietlDane());
                 //                    break; zeby usuwało kazdego z wyszukanych
             }
@@ -343,5 +344,16 @@ public class KontenerDanych implements Serializable {
     public List<Student> getStudenci()
     {
         return wyszukajStudenta(null,null,null,null,null);
+    }
+
+    private void usunReferencjeDoKursuUStudentow(Kurs kurs)
+    {
+        for(Osoba o: osoby)
+        {
+            if (o instanceof Student s)
+            {
+                s.getKursyList().remove(kurs);
+            }
+        }
     }
 }

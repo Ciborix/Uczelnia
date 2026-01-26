@@ -2,6 +2,7 @@ package model.osoba.student;
 
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Kurs implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -34,4 +35,18 @@ public class Kurs implements Serializable {
 
     public String wyswietlDane()
     {return "Nazwa: " + getNazwa() + " " + "Proawdzacy: " + getProwadzacy() + " Punkty ECTS: " + getPunktyECTS();}
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Kurs kurs = (Kurs) o;
+        return Objects.equals(nazwa, kurs.nazwa) && Objects.equals(prowadzacy, kurs.prowadzacy);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nazwa, prowadzacy);
+    }
 }

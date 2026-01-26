@@ -14,10 +14,13 @@ import java.util.List;
 public class KontrolerKursow implements IObserwator {
     private PanelKursow panel;
     private KontenerDanych model;
+    private JFrame parentFrame;
 
-    public KontrolerKursow(PanelKursow panel, KontenerDanych model) {
+    public KontrolerKursow(PanelKursow panel, KontenerDanych model, JFrame parentFrame) {
         this.panel = panel;
         this.model = model;
+        this.parentFrame = parentFrame;
+
         this.model.dodajObserwatora(this);
         odswiez();
     }
@@ -39,33 +42,34 @@ public class KontrolerKursow implements IObserwator {
     }
 
     public void dodajKurs() {
-        DodawanieKurs dialog = new DodawanieKurs(null);
+        DodawanieKurs dialog = new DodawanieKurs(parentFrame);
         dialog.setVisible(true);
 
         if (dialog.isZatwierdzono()) {
             try {
 
                 String nazwa = dialog.getNazwa();
+                if (nazwa.isEmpty()) throw new ValidationException("Nazwa kursu nie może być pusta!");
                 String prowadzacy = dialog.getProwadzacy();
                 int ects = Integer.parseInt(dialog.getEctsRaw());
-
+                if (ects < 0 || ects > 30) throw new ValidationException("Punkty ECTS maja być w przedziale 0-30!");
 
                 Kurs nowyKurs = new Kurs(nazwa, prowadzacy, ects);
-
-
                 model.dodajKurs(nowyKurs);
 
-                JOptionPane.showMessageDialog(null, "Dodano kurs: " + nazwa);
+                JOptionPane.showMessageDialog(parentFrame, "Dodano kurs: " + nazwa);
 
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Błąd: ECTS musi być liczbą całkowitą!");
+                JOptionPane.showMessageDialog(parentFrame,e.getMessage(), "Błąd: ECTS musi być liczbą całkowitą!",JOptionPane.WARNING_MESSAGE);
+            } catch (ValidationException e) {
+                JOptionPane.showMessageDialog(parentFrame, "ECTS musza byc liczba!","Bład", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
     public void usunKurs() {
         String[] opcje = {"Nazwa kursu", "Prowadzący", "Punkty ECTS"};
 
-        DialogUsuwania dialog = new DialogUsuwania(null, "Usuwanie Kursu", opcje);
+        DialogUsuwania dialog = new DialogUsuwania(parentFrame, "Usuwanie Kursu", opcje);
         dialog.setVisible(true);
 
         if (dialog.isZatwierdzono()) {
@@ -75,7 +79,7 @@ public class KontrolerKursow implements IObserwator {
     }
 
     public void szukajKursow() {
-        DialogWyszukiwaniaKursow d = new DialogWyszukiwaniaKursow(null);
+        DialogWyszukiwaniaKursow d = new DialogWyszukiwaniaKursow(parentFrame);
         d.setVisible(true);
 
         if (d.isZatwierdzono()) {

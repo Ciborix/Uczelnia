@@ -14,7 +14,7 @@ public class DodawaniePracownikaBD extends JDialog {
     private JButton btnZapisz = new JButton("Zapisz Pracownika");
 
     public DodawaniePracownikaBD(JFrame parent) {
-        super(parent, "Nowy Pracownik Administracyjny", true);
+        super(parent, "Nowy Pracownik Badawczo Dydaktyczny", true);
         setLayout(new GridLayout(0, 2, 5, 5));
 
         add(new JLabel(" Imię:")); add(txtImie);

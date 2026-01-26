@@ -7,11 +7,6 @@ import gui.tabele.PanelPracownikowBD;
 import gui.tabele.PanelStudentow;
 import model.Dane.KontenerDanych;
 import model.Dane.ManagerDanych;
-import model.comparator.Kursy.PoEctsNazwiskuProw;
-import model.comparator.Osoba.PoNazwisku;
-import model.comparator.Osoba.PoNazwiskuImieniu;
-import model.comparator.Osoba.PoNazwiskuWieku;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -37,13 +32,13 @@ public class KontrolerGUI {
         this.kontrolerStudentow = new KontrolerStudentow(panelStudentow, model, okno);
 
         PanelPracownikowAdministracyjnych panelPracownikowAdministracyjnych = new PanelPracownikowAdministracyjnych();
-        this.kontrolerPracownikowA = new KontrolerPracownikowA(panelPracownikowAdministracyjnych, model);
+        this.kontrolerPracownikowA = new KontrolerPracownikowA(panelPracownikowAdministracyjnych, model, okno);
 
         PanelPracownikowBD panelPracownikowBD = new PanelPracownikowBD();
-        this.kontrolerPracownikowBD = new KontrolerPracownikowBD(panelPracownikowBD,model);
+        this.kontrolerPracownikowBD = new KontrolerPracownikowBD(panelPracownikowBD,model,okno);
 
         PanelKursow panelKursow = new PanelKursow();
-        this.kontrolerKursow = new KontrolerKursow(panelKursow, model);
+        this.kontrolerKursow = new KontrolerKursow(panelKursow, model, okno);
 
 
         panelStudentow.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -102,7 +97,6 @@ public class KontrolerGUI {
 
         pokazKursy.addActionListener(e -> kontrolerStudentow.akcjaPokazKursy());
         dodajKursdoStudenta.addActionListener(e-> kontrolerStudentow.przypiszKurs());
-        usunDuplikaty.addActionListener(e-> usunDuplikaty());
 
         student.addActionListener(e -> kontrolerStudentow.otworzFormularzDodawania());
         pracownikA.addActionListener(e-> kontrolerPracownikowA.otworzFormularz());
@@ -113,9 +107,7 @@ public class KontrolerGUI {
         pracownikAdel.addActionListener(e-> kontrolerPracownikowA.usunPracownika());
         pracownikBDdel.addActionListener(e-> kontrolerPracownikowBD.usunPracownika());
         kursdel.addActionListener(e-> kontrolerKursow.usunKurs());
-
-
-
+        usunDuplikaty.addActionListener(e-> usunDuplikaty());
 
         wyszukajStudenta.addActionListener(e->kontrolerStudentow.wyszukajStudenta());
         wyszukajPracownikaA.addActionListener(e->kontrolerPracownikowA.szukajPracownika());
@@ -139,8 +131,7 @@ public class KontrolerGUI {
         menuSpecjalne.add(pokazKursy);
         menuSpecjalne.addSeparator();
         menuSpecjalne.add(dodajKursdoStudenta);
-        menuSpecjalne.addSeparator();
-        menuSpecjalne.add(usunDuplikaty);
+
 
 
         menuUsun.add(studentdel);
@@ -150,6 +141,8 @@ public class KontrolerGUI {
         menuUsun.add(pracownikBDdel);
         menuUsun.addSeparator();
         menuUsun.add(kursdel);
+        menuUsun.addSeparator();
+        menuUsun.add(usunDuplikaty);
 
 
         menuWyszukwanie.add(wyszukajStudenta);

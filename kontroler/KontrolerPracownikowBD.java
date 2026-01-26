@@ -15,10 +15,12 @@ import java.util.List;
 public class KontrolerPracownikowBD implements IObserwator {
     private PanelPracownikowBD panelPracownikowBD;
     private KontenerDanych model;
+    private JFrame parentFrame;
 
-    public KontrolerPracownikowBD(PanelPracownikowBD pracownikowBD, KontenerDanych model) {
+    public KontrolerPracownikowBD(PanelPracownikowBD pracownikowBD, KontenerDanych model, JFrame parentFrame) {
         this.panelPracownikowBD = pracownikowBD;
         this.model = model;
+        this.parentFrame = parentFrame;
 
         model.dodajObserwatora(this);
 
@@ -54,7 +56,7 @@ public class KontrolerPracownikowBD implements IObserwator {
     }
 
     public void otworzFormularz() {
-        DodawaniePracownikaBD dialog = new DodawaniePracownikaBD(null);
+        DodawaniePracownikaBD dialog = new DodawaniePracownikaBD(parentFrame);
         dialog.getBtnZapisz().addActionListener(e -> wykonajZapis(dialog));
         dialog.setVisible(true);
     }
@@ -69,10 +71,10 @@ public class KontrolerPracownikowBD implements IObserwator {
 
 
             if (staz > (wiek - 18)) {
-                throw new Exception("Staż pracy nie może być dłuższy niż wiek dorosły pracownika!");
+                throw new ValidationException("Staż pracy nie może być dłuższy niż wiek dorosły pracownika!");
             }
-            if (pensja < 0) throw new Exception("Pensja nie może być ujemna!");
-
+            if (pensja < 0) throw new ValidationException("Pensja nie może być ujemna!");
+            if (publikacje < 0) throw new ValidationException("Publikacje nie mogą byc liczba ujemna!");
 
             PracownikBadawczoDydaktyczny pa = new PracownikBadawczoDydaktyczny(
                     d.getImie(), d.getNazwisko(), d.getPesel(), wiek, d.getPlec(),
@@ -95,7 +97,7 @@ public class KontrolerPracownikowBD implements IObserwator {
 
     public void usunPracownika() {
         String[] kryteria = {"Nazwisko", "Imię", "Staż pracy", "Stanowisko"};
-        DialogUsuwania dialog = new DialogUsuwania(null, "Usuwanie Pracownika Administracyjnego", kryteria);
+        DialogUsuwania dialog = new DialogUsuwania(parentFrame, "Usuwanie Pracownika Administracyjnego", kryteria);
         dialog.setVisible(true);
 
         if (dialog.isZatwierdzono()) {
@@ -105,7 +107,7 @@ public class KontrolerPracownikowBD implements IObserwator {
 
 
     public void szukajPracownika() {
-        DialogWyszukiwaniaPracownika d = new DialogWyszukiwaniaPracownika(null);
+        DialogWyszukiwaniaPracownika d = new DialogWyszukiwaniaPracownika(parentFrame);
         d.setVisible(true);
 
         if (d.isZatwierdzono()) {
