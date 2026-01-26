@@ -7,7 +7,7 @@ import gui.wyszukiwanie.DialogWyszukiwaniaPracownika;
 import model.Dane.KontenerDanych;
 import model.obserwator.IObserwator;
 import model.osoba.pracownik.PracownikBadawczoDydaktyczny;
-import model.strategia.BonusAdministracyjny;
+import model.strategia.BonusBadawczy;
 
 import javax.swing.*;
 import java.util.List;
@@ -44,7 +44,7 @@ public class KontrolerPracownikowBD implements IObserwator {
             dane[i][1] = pa.getNazwisko();
             dane[i][2] = pa.getPesel();
             dane[i][3] = pa.getWiek();
-            dane[i][4] = pa.getPlec().equalsIgnoreCase("M") ? "Mężczyzna" : "Kobieta";
+            dane[i][4] = pa.getPlec().equalsIgnoreCase("Mężczyzna") ? "Mężczyzna" : "Kobieta";
             dane[i][5] = pa.getStanowisko();
             dane[i][6] = pa.getStazPracy();
             dane[i][7] = pa.getPensja();
@@ -82,7 +82,7 @@ public class KontrolerPracownikowBD implements IObserwator {
             );
 
 
-            pa.setBonusStategia(new BonusAdministracyjny());
+            pa.setBonusStategia(new BonusBadawczy());
 
 
             model.dodajOsobe(pa);
@@ -133,7 +133,7 @@ public class KontrolerPracownikowBD implements IObserwator {
             dane[i][1] = pb.getNazwisko();
             dane[i][2] = pb.getPesel();
             dane[i][3] = pb.getWiek();
-            dane[i][4] = pb.getPlec().equalsIgnoreCase("M") ? "Mężczyzna" : "Kobieta";
+            dane[i][4] = pb.getPlec().equalsIgnoreCase("Mężczyzna") ? "Mężczyzna" : "Kobieta";
             dane[i][5] = pb.getStanowisko();
             dane[i][6] = pb.getStazPracy();
             dane[i][7] = pb.getPensja();

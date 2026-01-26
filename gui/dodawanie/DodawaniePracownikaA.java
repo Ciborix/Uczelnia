@@ -12,7 +12,7 @@ public class DodawaniePracownikaA extends JDialog {
     private JComboBox<String> comboStanowisko = new JComboBox<>(new String[]{
             "Referent", "Specjalista", "Starszy Specjalista", "Kierownik"
     });
-    private JComboBox<String> comboPlec = new JComboBox<>(new String[]{"M", "K"});
+    private JComboBox<String> comboPlec = new JComboBox<>(new String[]{"Meżczyzna", "Kobieta"});
     private JButton btnZapisz = new JButton("Zapisz Pracownika");
 
     public DodawaniePracownikaA(JFrame parent) {

@@ -4,6 +4,7 @@ package model.osoba.student;
 import model.osoba.Osoba;
 import model.osoba.PrzedstawSie;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,7 +24,11 @@ public class Student extends Osoba implements PrzedstawSie {
         super(imie, nazwisko, pesel, wiek, plec);
         this.nrIndeks = nrIndeks;
         this.rokStudiow = rokStudiow;
-        this.kursList = kursList;
+        if (kursList == null) {
+            this.kursList = new ArrayList<>();
+        } else {
+            this.kursList = kursList;
+        }
         this.czyERASMUS = czyERASMUS;
         this.czyIStopien = czyIStopien;
         this.czyIIStopien = czyIIStopien;

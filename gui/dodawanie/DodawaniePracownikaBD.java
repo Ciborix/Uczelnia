@@ -10,7 +10,7 @@ public class DodawaniePracownikaBD extends JDialog {
     private JTextField txtPublikacje = new JTextField(5);
 
     private JComboBox<String> comboStanowisko = new JComboBox<>(new String[]{"Asystent", "Adiunkt", "Profesor Nadzwyczajny", "Profesor Zwyczajny", "Wykładowca"});
-    private JComboBox<String> comboPlec = new JComboBox<>(new String[]{"M", "K"});
+    private JComboBox<String> comboPlec = new JComboBox<>(new String[]{"Mężczyzna", "Kobieta"});
     private JButton btnZapisz = new JButton("Zapisz Pracownika");
 
     public DodawaniePracownikaBD(JFrame parent) {

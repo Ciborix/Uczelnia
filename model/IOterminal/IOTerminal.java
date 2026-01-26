@@ -148,4 +148,11 @@ public class IOTerminal {
         if (wybor>=0 && wybor<dostepneKursy.size()) return dostepneKursy.get(wybor);
         return null;
     }
+
+    public int spytajKryterium()
+    {
+        return ask("Czy chcesz wyszukac po kilku kryteriach czy tylko po jednym?" +
+                "\n1) Po jednym kryterium" +
+                "\n2) Po kilku");
+    }
 }

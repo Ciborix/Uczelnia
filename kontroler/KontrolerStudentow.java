@@ -47,7 +47,7 @@ public class KontrolerStudentow implements IObserwator{
             dane[i][1] = s.getNazwisko();
             dane[i][2] = s.getPesel();
             dane[i][3] = s.getWiek();
-            dane[i][4] = s.getPlec().equalsIgnoreCase("M") ? "Mężczyzna" : "Kobieta";
+            dane[i][4] = s.getPlec().equalsIgnoreCase("Mężczyzna") ? "Mężczyzna" : "Kobieta";
             dane[i][5] = s.getNrIndeks();
             dane[i][6] = s.getRokStudiow();
             dane[i][7] = s.isCzyERASMUS() ? "Tak": "Nie";
@@ -194,7 +194,7 @@ public class KontrolerStudentow implements IObserwator{
             dane[i][1] = s.getNazwisko();
             dane[i][2] = s.getPesel();
             dane[i][3] = s.getWiek();
-            dane[i][4] = s.getPlec().equalsIgnoreCase("M") ? "Mężczyzna" : "Kobieta";
+            dane[i][4] = s.getPlec().equalsIgnoreCase("Mężczyzna") ? "Mężczyzna" : "Kobieta";
             dane[i][5] = s.getNrIndeks();
             dane[i][6] = s.getRokStudiow();
             dane[i][7] = s.isCzyERASMUS() ? "Tak": "Nie";

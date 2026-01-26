@@ -45,7 +45,7 @@ public class KontrolerPracownikowA implements IObserwator {
             dane[i][1] = pa.getNazwisko();
             dane[i][2] = pa.getPesel();
             dane[i][3] = pa.getWiek();
-            dane[i][4] = pa.getPlec().equalsIgnoreCase("M") ? "Mężczyzna" : "Kobieta";
+            dane[i][4] = pa.getPlec().equalsIgnoreCase("Mężczyzna") ? "Mężczyzna" : "Kobieta";
             dane[i][5] = pa.getStanowisko();
             dane[i][6] = pa.getStazPracy();
             dane[i][7] = pa.getPensja();
@@ -130,7 +130,7 @@ public class KontrolerPracownikowA implements IObserwator {
             dane[i][1] = pa.getNazwisko();
             dane[i][2] = pa.getPesel();
             dane[i][3] = pa.getWiek();
-            dane[i][4] = pa.getPlec().equalsIgnoreCase("M") ? "Mężczyzna" : "Kobieta";
+            dane[i][4] = pa.getPlec().equalsIgnoreCase("Mężczyzna") ? "Mężczyzna" : "Kobieta";
             dane[i][5] = pa.getStanowisko();
             dane[i][6] = pa.getStazPracy();
             dane[i][7] = pa.getPensja();

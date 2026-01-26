@@ -12,7 +12,7 @@ public class DodawanieStudenta extends JDialog {
     private JTextField txtWiek = new JTextField(5);
     private JTextField txtIndeks = new JTextField(10);
 
-    private JComboBox<String> comboPlec = new JComboBox<>(new String[]{"M", "K"});
+    private JComboBox<String> comboPlec = new JComboBox<>(new String[]{"Meżczyzna", "Kobieta"});
     private JComboBox<Integer> comboRok = new JComboBox<>(new Integer[]{1, 2, 3, 4, 5});
     private JComboBox<String> comboStopien = new JComboBox<>(new String[]{"I stopień", "II stopień"});
 
