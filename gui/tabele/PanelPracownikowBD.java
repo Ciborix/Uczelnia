@@ -11,7 +11,7 @@ public class PanelPracownikowBD extends JPanel {
     public PanelPracownikowBD()
     {
         setLayout(new BorderLayout());
-        JLabel tytul = new JLabel("Lista Pracownikow Badawczo - Dydaktycznych", SwingConstants.CENTER);
+        JLabel tytul = new JLabel("\nLista Pracownikow Badawczo - Dydaktycznych", SwingConstants.CENTER);
         add(tytul, BorderLayout.NORTH);
         String[] kolumny = {"Imie", "Nazwisko", "Pesel", "Wiek", "Płeć", "Stanowisko", "Staz pracy", "Pensja", "Liczba publikacji", "Suma z bonusem"};
 

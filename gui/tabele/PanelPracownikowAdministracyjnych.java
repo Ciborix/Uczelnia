@@ -11,7 +11,7 @@ public class PanelPracownikowAdministracyjnych extends JPanel {
     public PanelPracownikowAdministracyjnych()
     {
         setLayout(new BorderLayout());
-        JLabel tytul = new JLabel("Lista Pracownikow Administracyjnych", SwingConstants.CENTER);
+        JLabel tytul = new JLabel("\nLista Pracownikow Administracyjnych", SwingConstants.CENTER);
         add(tytul, BorderLayout.NORTH);
         String[] kolumny = {"Imie", "Nazwisko", "Pesel", "Wiek", "Płeć", "Stanowisko", "Staz pracy", "Pensja", "Liczba nadgodzin", "Suma z bonusem"};
 

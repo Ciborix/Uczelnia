@@ -11,7 +11,7 @@ public class PanelStudentow extends JPanel {
     public PanelStudentow() {
         setLayout(new BorderLayout());
 
-        JLabel tytul = new JLabel("Lista Studentow", SwingConstants.CENTER);
+        JLabel tytul = new JLabel("\nLista Studentow", SwingConstants.CENTER);
         add(tytul, BorderLayout.NORTH);
         String[] kolumny = {"Imie", "Nazwisko", "Pesel", "Wiek", "Płeć", "Numer Indeks", "Rok Studiów"
                 , "Erasmus", "Stopień studiów", "Stacjonarny"};

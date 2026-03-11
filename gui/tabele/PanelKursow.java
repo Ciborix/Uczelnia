@@ -10,7 +10,7 @@ public class PanelKursow extends JPanel {
 
     public PanelKursow() {
         setLayout(new BorderLayout());
-        JLabel tytul = new JLabel("Lista Dostępnych Kursów", SwingConstants.CENTER);
+        JLabel tytul = new JLabel("\nLista Dostępnych Kursów", SwingConstants.CENTER);
         add(tytul, BorderLayout.NORTH);
 
         String[] kolumny = {"Nazwa Kursu", "Prowadzący", "Punkty ECTS"};
